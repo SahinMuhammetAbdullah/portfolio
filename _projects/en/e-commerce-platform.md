@@ -38,8 +38,8 @@ icon_class: "fas fa-shopping-cart"
 cover_image: "/assets/images/projects/ecommerce-cover.png" # 1920*960 pixel
 
 # LINKS:
-github_url: "https://github.com/yourusername/ecommerce-project" # GitHub repository of the project (if any)
-# live_url: "https://your-ecommerce-demo.com" # Live demo address of the project (if any) - Uncomment if you have one
+github_url: "https://github.com/SahinMuhametAbdullah/portfolio" # GitHub repository of the project (if any)
+live_url: "https://github.com/SahinMuhametAbdullah/portfolio" # Live demo address of the project (if any) - Uncomment if you have one
 
 layout: default
 lang: en

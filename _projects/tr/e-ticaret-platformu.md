@@ -38,8 +38,9 @@ icon_class: "fas fa-shopping-cart"
 cover_image: "/assets/images/projects/ecommerce-cover.png" # 1920*960 pixel
 
 # LİNKLER:
-github_url: "https://github.com/yourusername/ecommerce-project" # Projenin GitHub deposu (varsa)
-# live_url: "https://your-ecommerce-demo.com" # Projenin canlı demo adresi (varsa)
+github_url: "https://github.com/SahinMuhametAbdullah/portfolio" # Projenin GitHub deposu (varsa)
+live_url: "https://github.com/SahinMuhametAbdullah/portfolio" # Projenin canlı demo adresi (varsa)
+
 layout: default
 lang: tr
 ---
