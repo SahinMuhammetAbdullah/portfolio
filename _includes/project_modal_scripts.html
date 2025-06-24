@@ -81,6 +81,7 @@
 
     // Proje modalını kapatan fonksiyon
     function closeProjectModal() {
+        if (!projectModal || !projectModalContentContainer) return;
         projectModal.classList.add('opacity-0');
         projectModalContentContainer.classList.add('scale-95');
         setTimeout(() => {
@@ -90,11 +91,14 @@
     }
 
     // Kapatma olay dinleyicileri
-    projectModal.addEventListener('click', (e) => {
-        if (e.target.id === 'projectModal') closeProjectModal();
-    });
+    if(projectModal) {
+        projectModal.addEventListener('click', (e) => {
+            if (e.target.id === 'projectModal') closeProjectModal();
+        });
+    }
+    
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !projectModal.classList.contains('opacity-0')) {
+        if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('opacity-0')) {
             closeProjectModal();
         }
     });

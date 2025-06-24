@@ -9,6 +9,8 @@ layout: default
 {%- assign theme_name = site.active_theme | default: "mocha" -%}
 {%- assign colors = site.data.semantic_colors[theme_name] -%}
 
+{% include project_modal_scripts.html %}
+
 <section id="home" class="gradient-bg min-h-screen flex items-center justify-center pt-20">
     <div class="text-center px-6">
         <div class="relative mb-8">
