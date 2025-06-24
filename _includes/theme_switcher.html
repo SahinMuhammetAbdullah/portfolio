@@ -18,17 +18,13 @@
 </div>
 
 <script>
-// DÜZELTME: Tüm kod, sayfa tamamen yüklendikten sonra çalışması için bu bloğun içine alındı.
 document.addEventListener('DOMContentLoaded', () => {
-    // Her bir tema seçici örneği için kendi kapsamını (scope) oluşturuyoruz.
     const instanceId = '{{ instance_id }}';
     const container = document.getElementById(`theme-switcher-container-${instanceId}`);
     const button = document.getElementById(`theme-switcher-button-${instanceId}`);
     const menu = document.getElementById(`theme-switcher-menu-${instanceId}`);
 
-    // Script'in çalışması için elementlerin var olduğunu kontrol ediyoruz.
     if (!container || !button || !menu) {
-        // console.error(`Theme switcher instance '${instanceId}' not found.`);
         return;
     }
 
@@ -43,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', (e) => {
         e.stopPropagation();
         const isHidden = menu.classList.contains('opacity-0');
-        // Diğer açık menüleri kapat (varsa)
         document.querySelectorAll('[id^="theme-switcher-menu-"]').forEach(otherMenu => {
             if (otherMenu.id !== menu.id) {
                 otherMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
@@ -62,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Menü dışına tıklanınca tüm tema seçici menülerini kapat
 document.addEventListener('click', (e) => {
     if (!e.target.closest('[id^="theme-switcher-container-"]')) {
         document.querySelectorAll('[id^="theme-switcher-menu-"]').forEach(menu => {
