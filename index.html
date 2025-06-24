@@ -5,13 +5,12 @@ layout: default
 {%- assign strings_for_current_page = site.data.translations[current_page_lang] -%}
 {%- assign profile_for_current_page = site.data.profile[current_page_lang] -%}
 {%- assign global_site_profile = site.data.profile -%}
+{%- assign s_global = site.data.translations -%}
 
 {%- assign theme_name = site.active_theme | default: "mocha" -%}
 {%- assign colors = site.data.semantic_colors[theme_name] -%}
 
-{% include project_modal_scripts.html %}
-
-<section id="home" class="gradient-bg min-h-screen flex items-center justify-center pt-20">
+<section id="home" class="{{ colors.bg_hero }} min-h-screen flex items-center justify-center pt-20">
     <div class="text-center px-6">
         <div class="relative mb-8">
             <div
@@ -93,12 +92,25 @@ layout: default
 </section>
 
 <section id="projects" class="py-20 {{ colors.bg_page }}">
-    <!-- ... Projeler bölümünün geri kalanı aynı kalabilir, renkler project_card.html içinde yönetilmelidir ... -->
     <div class="container mx-auto px-6">
         <h2 class="text-4xl font-bold text-center mb-12 {{ colors.section_title }}">
             {{ strings_for_current_page.section_title_projects }}
         </h2>
-        <!-- ... -->
+        
+        <!-- EKSİK OLAN VE ŞİMDİ EKLENEN PROJE DÖNGÜSÜ -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {% assign base_project_path = '_projects/' | append: current_page_lang | append: '/' %}
+            {% assign projects_lang = site.projects | where_exp: "item", "item.path contains base_project_path" | sort: "order" %}
+
+            {% for project_item in projects_lang %}
+                {% include project_card.html project=project_item lang=current_page_lang colors=colors %}
+            {% else %}
+                <p class="text-ctp-subtext1 text-center col-span-full">
+                    Bu dilde gösterilecek proje bulunamadı.
+                </p>
+            {% endfor %}
+        </div>
+        
     </div>
 </section>
 
@@ -114,13 +126,13 @@ layout: default
                 class="mt-12 flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-4 sm:space-y-0">
                 <a href="mailto:{{ global_site_profile.email }}"
                     class="flex items-center {{ colors.link }} {{ colors.link_hover }} transition-colors">
-                    <!-- ... svg icon ... -->
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                     {{ global_site_profile.email }}
                 </a>
                 {% if global_site_profile.phone %}
                 <a href="tel:{{ global_site_profile.phone | remove: ' ' }}"
                     class="flex items-center {{ colors.link }} {{ colors.link_hover }} transition-colors">
-                    <!-- ... svg icon ... -->
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
                     {{ global_site_profile.phone }}
                 </a>
                 {% endif %}
@@ -129,6 +141,7 @@ layout: default
     </div>
 </section>
 
+<!-- MODAL HTML'İ -->
 <div id="projectModal"
     class="fixed inset-0 {{ colors.bg_modal_overlay }} backdrop-blur-sm z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none">
     <div
@@ -137,7 +150,7 @@ layout: default
         <div class="p-6 md:p-8 relative">
             <button onclick="closeProjectModal()"
                 class="absolute top-4 right-4 text-ctp-overlay1 {{ colors.close_button_hover }} transition-colors z-10"
-                aria-label="{{ s.project_modal_close_button_aria_label | default: 'Close modal' }}">
+                aria-label="{{ s_global[current_page_lang].project_modal_close_button_aria_label | default: 'Close modal' }}">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -155,11 +168,11 @@ layout: default
                     <div class="flex space-x-3">
                         <a id="modalGithub" href="#" target="_blank" rel="noopener noreferrer"
                             class="social-btn {{ colors.button_github }} px-5 py-2.5 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                            {{ s_global[site.active_lang].project_modal_github_link_text | default: "GitHub" }}
+                            {{ s_global[current_page_lang].project_modal_github_link_text | default: "GitHub" }}
                         </a>
                         <a id="modalLive" href="#" target="_blank" rel="noopener noreferrer"
                             class="social-btn {{ colors.button_live }} px-5 py-2.5 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                            {{ s_global[site.active_lang].project_modal_live_demo_link_text | default: "Live Demo" }}
+                            {{ s_global[current_page_lang].project_modal_live_demo_link_text | default: "Live Demo" }}
                         </a>
                     </div>
                 </div>
@@ -167,3 +180,6 @@ layout: default
         </div>
     </div>
 </div>
+
+<!-- SCRIPT DOSYASI SAYFANIN SONUNA TAŞINDI VE SADECE BİR KEZ ÇAĞRILIYOR -->
+{% include project_modal_scripts.html %}

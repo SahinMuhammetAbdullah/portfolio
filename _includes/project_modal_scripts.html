@@ -1,14 +1,10 @@
-{%- comment -%}
-    Tüm dillerdeki proje verilerini tek bir JSON nesnesine dönüştürüyoruz.
-    Bu, JavaScript'in tüm verilere tek seferde erişmesini sağlar.
-{%- endcomment -%}
 {%- capture project_data_json -%}
 {
     {%- for lang in site.languages -%}
     "{{ lang }}": {
         "projects": [
             {%- assign base_project_path = '_projects/' | append: lang | append: '/' -%}
-            {%- assign projects_for_lang = site.projects | where_exp: "item", "item.path contains base_project_path" -%}
+            {%- assign projects_for_lang = site.projects | where_exp: "item", "item.path contains base_project_path" | sort: "order" -%}
             {%- for p in projects_for_lang -%}
             {
                 "id": "{{ p.id | slugify }}",
@@ -26,10 +22,7 @@
 {%- endcapture -%}
 
 <script>
-    // Jekyll tarafından oluşturulan JSON verisini JavaScript nesnesine çeviriyoruz.
     const allProjectsData = {{ project_data_json }};
-
-    // Modal için gerekli HTML elementlerini seçiyoruz.
     const modalContentEl = document.getElementById('modalContent');
     const modalTagsEl = document.getElementById('modalTags');
     const modalGithubEl = document.getElementById('modalGithub');
@@ -38,48 +31,32 @@
     const projectModalContentContainer = document.getElementById('projectModalContentContainer');
     const modalTitleEl = document.getElementById('modalTitle');
     
-    // Proje modalını açan fonksiyon
-    // Temaya uygun etiket renklerini de parametre olarak alıyoruz.
     function openProjectModal(projectId, lang, tagBgClass, tagTextClass) {
         if (!allProjectsData || !allProjectsData[lang]) {
-            console.error(`Project data for language '${lang}' not found.`);
             return;
         }
-
         const project = allProjectsData[lang].projects.find(p => p.id === projectId);
-
         if (project) {
             modalTitleEl.textContent = project.title || "Başlık Yok";
             modalContentEl.innerHTML = project.content || "<p>İçerik bulunamadı.</p>";
-
-            // Etiketleri oluştur
             modalTagsEl.innerHTML = '';
             if (project.tags && project.tags.length > 0) {
                 project.tags.forEach(tag => {
                     const tagElement = document.createElement('span');
-                    // Gelen parametrelerle dinamik olarak sınıf atıyoruz.
                     tagElement.className = `px-3 py-1 ${tagBgClass} ${tagTextClass} rounded-full text-xs`;
                     tagElement.textContent = tag;
                     modalTagsEl.appendChild(tagElement);
                 });
             }
-
-            // Linkleri ayarla
             modalGithubEl.href = project.github || '#';
             modalLiveEl.href = project.live || '#';
             modalGithubEl.style.display = project.github ? 'inline-flex' : 'none';
             modalLiveEl.style.display = project.live ? 'inline-flex' : 'none';
-
-            // Modalı görünür yap
             projectModal.classList.remove('opacity-0', 'pointer-events-none');
             projectModalContentContainer.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
-        } else {
-            console.error(`Project with ID '${projectId}' not found in language '${lang}'.`);
         }
     }
-
-    // Proje modalını kapatan fonksiyon
     function closeProjectModal() {
         if (!projectModal || !projectModalContentContainer) return;
         projectModal.classList.add('opacity-0');
@@ -87,16 +64,13 @@
         setTimeout(() => {
             projectModal.classList.add('pointer-events-none');
             document.body.style.overflow = 'auto';
-        }, 300); // Transition süresiyle eşleşmeli
+        }, 300);
     }
-
-    // Kapatma olay dinleyicileri
     if(projectModal) {
         projectModal.addEventListener('click', (e) => {
             if (e.target.id === 'projectModal') closeProjectModal();
         });
     }
-    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('opacity-0')) {
             closeProjectModal();
