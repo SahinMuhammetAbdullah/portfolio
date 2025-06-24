@@ -24,10 +24,10 @@ layout: default
         </p>
         <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-12">
             {% for social in site.data.social_for_current_page.links limit:4 %}
-            <a href="{{ social_for_current_page.url }}" target="_blank" rel="noopener noreferrer"
+            <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer"
                class="social-btn bg-{{ social.bg_color }} hover:bg-{{ social.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold mb-2 sm:mb-0 flex items-center space-x-2">
-                <i class="{{ social_for_current_page.icon_class }} fa-fw"></i>
-                <span>{{ social_for_current_page.name }}</span>
+                <i class="{{ social.icon_class }} fa-fw"></i>
+                <span>{{ social.name }}</span>
             </a>
             {% endfor %}
         </div>
