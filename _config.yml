@@ -103,6 +103,20 @@ parallel_localization: false
 #     the name of a theme in the _data/themes.yml file (e.g., mocha, latte).
 active_theme: "latte" # Burayı "latte" olarak değiştirerek açık temaya geçebilirsiniz. "mocha" ile koyu tamaya dönebilirsiniz
 
+# TR: Tema değiştirici menüsünde gösterilecek temaların listesi.
+#     Her temanın anahtarı (_data/themes.yml dosyasındaki ad) ve görünen adı olmalıdır.
+# EN: The list of themes to be displayed in the theme switcher menu.
+#     Each theme must have a key (its name in _data/themes.yml) and a display name.
+available_themes:
+  - key: "mocha"
+    name: "Mocha (Koyu)"
+  - key: "latte"
+    name: "Latte (Açık)"
+  - key: "frappe"
+    name: "Frappé (Koyu)"
+  - key: "macchiato"
+    name: "Macchiato (Koyu)"
+    
 # TR: Tarayıcı sekmesi ve mobil cihazlarda adres çubuğu için tema rengi.
 # EN: Theme color for the browser UI, especially on mobile devices.
 theme_color: "{{ site.data.themes[site.active_theme]['ctp-base'] }}"

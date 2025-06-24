@@ -1,0 +1,62 @@
+{% assign instance_id = include.id | default: 'default' %}
+
+<div class="relative" id="theme-switcher-container-{{ instance_id }}">
+    <button id="theme-switcher-button-{{ instance_id }}" class="flex items-center space-x-2 px-3 py-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-surface0 hover:text-ctp-text transition-colors" aria-label="Temayı değiştir">
+        <i class="fa-solid fa-palette fa-fw"></i>
+        {% if instance_id == 'desktop' %}
+            <span class="hidden md:inline">Tema</span>
+            <i class="fa-solid fa-caret-down fa-xs"></i>
+        {% endif %}
+    </button>
+    <div id="theme-switcher-menu-{{ instance_id }}" class="absolute right-0 mt-2 w-48 bg-ctp-mantle rounded-lg shadow-xl py-1 z-50 opacity-0 pointer-events-none transition-all duration-200 transform origin-top-right -translate-y-2">
+        {% for theme in site.available_themes %}
+            <a href="#" class="block px-4 py-2 text-sm text-ctp-subtext1 hover:bg-ctp-surface1 hover:text-ctp-text" data-theme-key="{{ theme.key }}">
+                {{ theme.name }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+// Her bir tema seçici örneği için kendi kapsamını (scope) oluşturuyoruz.
+(function() {
+    const instanceId = '{{ instance_id }}';
+    const container = document.getElementById(`theme-switcher-container-${instanceId}`);
+    const button = document.getElementById(`theme-switcher-button-${instanceId}`);
+    const menu = document.getElementById(`theme-switcher-menu-${instanceId}`);
+
+    if (!container || !button || !menu) return;
+
+    const toggleMenu = (show) => {
+        if (show) {
+            menu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+        } else {
+            menu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+        }
+    };
+
+    button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = menu.classList.contains('opacity-0');
+        toggleMenu(isHidden);
+    });
+
+    // Menü dışına tıklanınca kapat
+    document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) {
+            toggleMenu(false);
+        }
+    });
+
+    menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' && e.target.dataset.themeKey) {
+            e.preventDefault();
+            const selectedTheme = e.target.dataset.themeKey;
+            // Seçimi tarayıcı hafızasına kaydet
+            localStorage.setItem('portfolio_theme', selectedTheme);
+            // Değişikliklerin uygulanması için sayfayı yeniden yükle.
+            window.location.reload();
+        }
+    });
+})();
+</script>

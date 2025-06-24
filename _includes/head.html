@@ -28,25 +28,23 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // 1. Adım: Jekyll ile tüm tema verilerini bir JavaScript nesnesi olarak oluşturuyoruz.
+        const allThemeColors = {{ site.data.themes | jsonify }};
+        
+        // 2. Adım: Kullanıcının son seçimini tarayıcı hafızasından (localStorage) okuyoruz.
+        // Eğer bir seçim yoksa, _config.yml'deki varsayılan temayı kullanıyoruz.
+        const preferredTheme = localStorage.getItem('portfolio_theme') || '{{ site.active_theme | default: "mocha" }}';
+        
+        // 3. Adım: Tailwind'i, seçilen temaya göre yapılandırıyoruz.
+        // Bu script, sayfanın geri kalanından önce çalıştığı için "yanıp sönme" (FOUC) olmaz.
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        {%- comment -%} _config.yml dosyasından aktif tema adını alıyoruz. {%- endcomment -%}
-                        {%- assign active_theme_name = site.active_theme | default: "mocha" -%}
-                        
-                        {%- comment -%} _data/themes.yml dosyasından ilgili tema renklerini çekiyoruz. {%- endcomment -%}
-                        {%- assign theme_colors = site.data.themes[active_theme_name] -%}
-
-                        {%- comment -%} Renkleri döngüye alıp JavaScript objesi olarak yazdırıyoruz. {%- endcomment -%}
-                        {%- for color in theme_colors -%}
-                            '{{ color[0] }}': '{{ color[1] }}'{% unless forloop.last %},{% endunless %}
-                        {%- endfor -%}
-                    }
+                    colors: allThemeColors[preferredTheme] || allThemeColors['mocha']
                 }
             }
-        }
-    </script>
+        };
+    </script>   
     <link rel="stylesheet" href="{{ '/assets/css/all.min.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     {% feed_meta %}
