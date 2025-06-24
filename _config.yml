@@ -109,14 +109,14 @@ active_theme: "latte" # Burayı "latte" olarak değiştirerek açık temaya geç
 #     Each theme must have a key (its name in _data/themes.yml) and a display name.
 available_themes:
   - key: "mocha"
-    name: "Mocha (Koyu)"
+    name: "Mocha"
   - key: "latte"
-    name: "Latte (Açık)"
+    name: "Latte"
   - key: "frappe"
-    name: "Frappé (Koyu)"
+    name: "Frappé"
   - key: "macchiato"
-    name: "Macchiato (Koyu)"
-    
+    name: "Macchiato"
+
 # TR: Tarayıcı sekmesi ve mobil cihazlarda adres çubuğu için tema rengi.
 # EN: Theme color for the browser UI, especially on mobile devices.
 theme_color: "{{ site.data.themes[site.active_theme]['ctp-base'] }}"
