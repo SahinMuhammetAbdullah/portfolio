@@ -7,9 +7,9 @@
 <nav class="fixed top-0 w-full bg-ctp-base/95 backdrop-blur-sm border-b border-ctp-surface0 z-50">
     <div class="container mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
-            <!-- Logo/Link -->
+            <!-- Logo/Link - BaseURL kontrolü ile -->
             <a href="{% if current_active_lang == site.default_lang %}{{ baseurl_prefix }}/{% else %}{{ baseurl_prefix }}/{{ current_active_lang }}/{% endif %}" 
-               class="text-2xl font-bold text-ctp-lavender hover:text-ctp-mauve transition-colors">
+               class="text-2xl font-bold text-ctp-lavender">
                 {{ site.data.profile.name | default: "Site Name" }}
             </a>
 
@@ -109,8 +109,6 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-
-                <!-- Hamburger Butonu -->
                 <button id="mobile-menu-btn" class="text-ctp-text hover:text-ctp-lavender">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -146,26 +144,3 @@
         </div>
     </div>
 </nav>
-
-<!-- Navigasyon Menüsü için JavaScript -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (link.getAttribute('href').startsWith('#')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-    }
-});
-</script>
