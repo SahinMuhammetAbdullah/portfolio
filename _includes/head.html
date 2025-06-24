@@ -32,15 +32,16 @@
             theme: {
                 extend: {
                     colors: {
-                        'ctp-base': '#1e1e2e', 'ctp-mantle': '#181825', 'ctp-crust': '#11111b',
-                        'ctp-surface0': '#313244', 'ctp-surface1': '#45475a', 'ctp-surface2': '#585b70',
-                        'ctp-overlay0': '#6c7086', 'ctp-overlay1': '#7f849c', 'ctp-overlay2': '#9399b2',
-                        'ctp-subtext0': '#a6adc8', 'ctp-subtext1': '#bac2de', 'ctp-text': '#cdd6f4',
-                        'ctp-lavender': '#b4befe', 'ctp-blue': '#89b4fa', 'ctp-sapphire': '#74c7ec',
-                        'ctp-sky': '#89dceb', 'ctp-teal': '#94e2d5', 'ctp-green': '#a6e3a1',
-                        'ctp-yellow': '#f9e2af', 'ctp-peach': '#fab387', 'ctp-maroon': '#eba0ac',
-                        'ctp-red': '#f38ba8', 'ctp-mauve': '#cba6f7', 'ctp-pink': '#f5c2e7',
-                        'ctp-flamingo': '#f2cdcd', 'ctp-rosewater': '#f5e0dc'
+                        {%- comment -%} _config.yml dosyasından aktif tema adını alıyoruz. {%- endcomment -%}
+                        {%- assign active_theme_name = site.active_theme | default: "mocha" -%}
+                        
+                        {%- comment -%} _data/themes.yml dosyasından ilgili tema renklerini çekiyoruz. {%- endcomment -%}
+                        {%- assign theme_colors = site.data.themes[active_theme_name] -%}
+
+                        {%- comment -%} Renkleri döngüye alıp JavaScript objesi olarak yazdırıyoruz. {%- endcomment -%}
+                        {%- for color in theme_colors -%}
+                            '{{ color[0] }}': '{{ color[1] }}'{% unless forloop.last %},{% endunless %}
+                        {%- endfor -%}
                     }
                 }
             }

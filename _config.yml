@@ -47,10 +47,10 @@ theme: null
 # TR: Jekyll eklentileri. Projenizin ihtiyaç duyduğu eklentileri buraya ekleyin.
 # EN: Jekyll plugins. Add the plugins your project requires here.
 plugins:
-  - jekyll-feed           # TR: RSS beslemesi oluşturur. / EN: Creates an RSS feed.
-  - jekyll-seo-tag        # TR: SEO için meta etiketleri ekler. / EN: Adds meta tags for SEO.
-  - jekyll-sitemap          # TR: site haritası oluşturur. / EN: Generates a sitemap.
-  - jekyll-polyglot       # TR: Çoklu dil desteği sağlar. / EN: Provides multi-language support.
+  - jekyll-feed # TR: RSS beslemesi oluşturur. / EN: Creates an RSS feed.
+  - jekyll-seo-tag # TR: SEO için meta etiketleri ekler. / EN: Adds meta tags for SEO.
+  - jekyll-sitemap # TR: site haritası oluşturur. / EN: Generates a sitemap.
+  - jekyll-polyglot # TR: Çoklu dil desteği sağlar. / EN: Provides multi-language support.
 
 # -----------------------------------------------------------------------------
 # Koleksiyonlar / Collections
@@ -88,29 +88,44 @@ exclude_from_localization: ["assets/", "admin/"]
 # EN: If true, languages are built in parallel (can be faster), if false, sequentially. False is recommended for debugging.
 parallel_localization: false
 
+#
 # -----------------------------------------------------------------------------
 # Favicon ve PWA Tema Ayarları / Favicon & PWA Theme Settings
 # -----------------------------------------------------------------------------
+# TR: Bu değerler artık doğrudan _data/themes.yml dosyasından okunacak.
+#     Aşağıdaki ayarlara dokunmanıza gerek yok, sadece yukarıdaki 'active_theme'i değiştirin.
+# EN: These values will now be read directly from the _data/themes.yml file.
+#     You don't need to touch the settings below, just change 'active_theme' above.
+
+# TR: Sitenin aktif renk paletini belirler. Değer, _data/themes.yml dosyasındaki
+#     bir temanın adıyla eşleşmelidir (örn: mocha, latte).
+# EN: Determines the active color palette for the site. The value must match
+#     the name of a theme in the _data/themes.yml file (e.g., mocha, latte).
+active_theme: "latte" # Burayı "latte" olarak değiştirerek açık temaya geçebilirsiniz.
+
 # TR: Tarayıcı sekmesi ve mobil cihazlarda adres çubuğu için tema rengi.
 # EN: Theme color for the browser UI, especially on mobile devices.
-theme_color: "#1e1e2e"       # Catppuccin Base
+theme_color: "{{ site.data.themes[site.active_theme]['ctp-base'] }}"
 
 # TR: PWA (Progressive Web App) splash screen için arka plan rengi.
 # EN: Background color for the PWA splash screen.
-background_color: "#11111b"  # Catppuccin Crust
+background_color: "{{ site.data.themes[site.active_theme]['ctp-crust'] }}"
 
 # TR: Windows Metro arayüzünde siteniz sabitlendiğinde kullanılacak karo rengi.
 # EN: Tile color for when your site is pinned on the Windows Metro UI.
-ms_tile_color: "#b4befe"     # Catppuccin Lavender
+ms_tile_color: "{{ site.data.themes[site.active_theme]['ctp-lavender'] }}"
 
 # TR: Varsayılan favicon yolu (jekyll-seo-tag gibi bazı eklentiler tarafından kullanılabilir, ancak ana favicon yönetimi head.html'dedir).
 # EN: Default favicon path (can be used by some plugins like jekyll-seo-tag, but main favicon management is in head.html).
 favicon: /assets/images/favicons/favicon-96x96.png
 
 # -----------------------------------------------------------------------------
-# Footer ve Lisans Bilgileri / Footer & License Information
+# Tema Ayarları / Theme Settings
 # -----------------------------------------------------------------------------
 
+# -----------------------------------------------------------------------------
+# Footer ve Lisans Bilgileri / Footer & License Information
+# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # Bu Alana Dokunmayınız / Do Not Touch This Area
@@ -149,7 +164,6 @@ technologies_used:
 # -----------------------------------------------------------------------------
 # Bitti / Finished
 # -----------------------------------------------------------------------------
-
 
 # TR: Sizin projenizin GitHub (veya başka bir platformdaki) depo URL'si.
 # EN: The URL of your project's repository on GitHub (or other platform).
