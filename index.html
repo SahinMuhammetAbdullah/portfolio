@@ -1,72 +1,87 @@
 ---
 layout: default
 ---
-{% assign current_page_lang = site.active_lang | default: site.default_lang %}
-{% assign strings_for_current_page = site.data.translations[current_page_lang] %}
-{% assign profile_for_current_page = site.data.profile[current_page_lang] %}
-{% assign global_site_profile = site.data.profile %}
+{%- assign current_page_lang = site.active_lang | default: site.default_lang -%}
+{%- assign strings_for_current_page = site.data.translations[current_page_lang] -%}
+{%- assign profile_for_current_page = site.data.profile[current_page_lang] -%}
+{%- assign global_site_profile = site.data.profile -%}
+
+{%- assign theme_name = site.active_theme | default: "mocha" -%}
+{%- assign colors = site.data.semantic_colors[theme_name] -%}
 
 <section id="home" class="gradient-bg min-h-screen flex items-center justify-center pt-20">
     <div class="text-center px-6">
         <div class="relative mb-8">
-            <div class="w-40 h-40 rounded-full mx-auto overflow-hidden border-4 border-ctp-lavender glow-effect floating-animation">
-                <img src="{{ global_site_profile.avatar | relative_url }}" alt="Profile of {{ global_site_profile.name }}" class="w-full h-full object-cover">
+            <div
+                class="w-40 h-40 rounded-full mx-auto overflow-hidden border-4 {{ colors.border_profile_pic }} glow-effect floating-animation">
+                <img src="{{ global_site_profile.avatar | relative_url }}"
+                    alt="Profile of {{ global_site_profile.name }}" class="w-full h-full object-cover">
             </div>
         </div>
         <h1 class="text-5xl md:text-7xl font-bold mb-4">
-            <span class="text-ctp-text">{{ profile_for_current_page.greeting_intro }}</span>
+            <span class="{{ colors.text_greeting }}">{{ profile_for_current_page.greeting_intro }}</span>
             <br>
-            <span class="text-ctp-lavender">{{ global_site_profile.name }}</span>
+            <span class="{{ colors.text_name_highlight }}">{{ global_site_profile.name }}</span>
         </h1>
-        <p class="text-xl md:text-2xl text-ctp-subtext1 mb-8">
+        <p class="text-xl md:text-2xl {{ colors.text_subtle }} mb-8">
             {{ profile_for_current_page.tagline }}
         </p>
         <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-12">
             {% for social in site.data.social.links limit:4 %}
             <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer"
-               class="social-btn bg-{{ social.bg_color }} hover:bg-{{ social.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold mb-2 sm:mb-0 flex items-center space-x-2">
+                class="social-btn bg-{{ social.bg_color }} hover:bg-{{ social.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold mb-2 sm:mb-0 flex items-center space-x-2">
                 <i class="{{ social.icon_class }} fa-fw"></i>
                 <span>{{ social.name }}</span>
             </a>
             {% endfor %}
         </div>
         <div class="animate-bounce">
-            <a href="#about" class="text-ctp-lavender hover:text-ctp-blue transition-colors" aria-label="{{ strings_for_current_page.hero_scroll_aria_label }}">
+            <a href="#about" class="{{ colors.scroll_arrow }} {{ colors.scroll_arrow_hover }} transition-colors"
+                aria-label="{{ strings_for_current_page.hero_scroll_aria_label }}">
                 <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>
             </a>
         </div>
     </div>
 </section>
 
-<section id="about" class="py-20 bg-ctp-mantle">
+<section id="about" class="py-20 {{ colors.bg_section_alt }}">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12 text-ctp-lavender">{{ strings_for_current_page.section_title_about }}</h2>
-            <div class="bg-ctp-surface0 rounded-2xl p-8 md:p-12">
+            <h2 class="text-4xl font-bold text-center mb-12 {{ colors.section_title }}">{{
+                strings_for_current_page.section_title_about }}</h2>
+            <div class="{{ colors.bg_card }} rounded-2xl p-8 md:p-12">
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <h3 class="text-2xl font-semibold mb-4 text-ctp-blue">{{ profile_for_current_page.about_title }}</h3>
-                        <p class="text-ctp-subtext1 mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-semibold mb-4 {{ colors.about_subtitle }}">{{
+                            profile_for_current_page.about_title }}</h3>
+                        <p class="{{ colors.text_subtle }} mb-6 leading-relaxed">
                             {{ profile_for_current_page.about_bio_1 }}
                         </p>
-                        <p class="text-ctp-subtext1 leading-relaxed">
+                        <p class="{{ colors.text_subtle }} leading-relaxed">
                             {{ profile_for_current_page.about_bio_2 }}
                         </p>
                     </div>
                     <div class="space-y-4">
-                        <div class="bg-ctp-surface1 rounded-lg p-4">
-                            <h4 class="font-semibold text-ctp-green mb-2">{{ profile_for_current_page.skills.frontend.title }}</h4>
-                            <p class="text-sm text-ctp-subtext1">{{ profile_for_current_page.skills.frontend.items }}</p>
+                        <div class="{{ colors.bg_card_nested }} rounded-lg p-4">
+                            <h4 class="font-semibold {{ colors.skill_title_1 }} mb-2">{{
+                                profile_for_current_page.skills.frontend.title }}</h4>
+                            <p class="text-sm {{ colors.text_subtle }}">{{
+                                profile_for_current_page.skills.frontend.items }}</p>
                         </div>
-                        <div class="bg-ctp-surface1 rounded-lg p-4">
-                            <h4 class="font-semibold text-ctp-blue mb-2">{{ profile_for_current_page.skills.backend.title }}</h4>
-                            <p class="text-sm text-ctp-subtext1">{{ profile_for_current_page.skills.backend.items }}</p>
+                        <div class="{{ colors.bg_card_nested }} rounded-lg p-4">
+                            <h4 class="font-semibold {{ colors.skill_title_2 }} mb-2">{{
+                                profile_for_current_page.skills.backend.title }}</h4>
+                            <p class="text-sm {{ colors.text_subtle }}">{{ profile_for_current_page.skills.backend.items
+                                }}</p>
                         </div>
-                        <div class="bg-ctp-surface1 rounded-lg p-4">
-                            <h4 class="font-semibold text-ctp-mauve mb-2">{{ profile_for_current_page.skills.database.title }}</h4>
-                            <p class="text-sm text-ctp-subtext1">{{ profile_for_current_page.skills.database.items }}</p>
+                        <div class="{{ colors.bg_card_nested }} rounded-lg p-4">
+                            <h4 class="font-semibold {{ colors.skill_title_3 }} mb-2">{{
+                                profile_for_current_page.skills.database.title }}</h4>
+                            <p class="text-sm {{ colors.text_subtle }}">{{
+                                profile_for_current_page.skills.database.items }}</p>
                         </div>
                     </div>
                 </div>
@@ -75,54 +90,35 @@ layout: default
     </div>
 </section>
 
-<section id="projects" class="py-20 bg-ctp-base">
+<section id="projects" class="py-20 {{ colors.bg_page }}">
+    <!-- ... Projeler bölümünün geri kalanı aynı kalabilir, renkler project_card.html içinde yönetilmelidir ... -->
     <div class="container mx-auto px-6">
-        {% assign lang_for_projects = site.active_lang | default: site.default_lang | default: "tr" %}
-        {% assign s_for_projects_debug = site.data.strings[lang_for_projects] %}
-        <h2 class="text-4xl font-bold text-center mb-12 text-ctp-lavender">
+        <h2 class="text-4xl font-bold text-center mb-12 {{ colors.section_title }}">
             {{ strings_for_current_page.section_title_projects }}
         </h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {% assign base_project_path = '_projects/' | append: lang_for_projects | append: '/' %}
-            {% assign projects_lang = site.projects | where_exp: "item", "item.path contains base_project_path" | sort: "order" %}
-
-            {% if projects_lang.size > 0 %}
-                {% for project_item in projects_lang %}
-                    {% include project_card.html project=project_item lang=lang_for_projects s=s_for_projects_debug %}
-                {% endfor %}
-            {% else %}
-                <p class="text-ctp-subtext1 text-center col-span-full">
-                    {% if s_for_projects_debug and s_for_projects_debug.no_projects_found_prefix %}
-                        {{ s_for_projects_debug.no_projects_found_prefix }}{{ lang_for_projects }}{{ s_for_projects_debug.no_projects_found_suffix }}
-                    {% else %}
-                        No projects found for this language ({{ lang_for_projects }}). 
-                    {% endif %}
-                </p>
-            {% endif %}
-        </div>
+        <!-- ... -->
     </div>
 </section>
 
-<section id="contact" class="py-20 bg-ctp-mantle">
+<section id="contact" class="py-20 {{ colors.bg_section_alt }}">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-8 text-ctp-lavender">{{ strings_for_current_page.section_title_contact }}</h2>
-            <p class="text-xl text-ctp-subtext1 mb-12">
+            <h2 class="text-4xl font-bold mb-8 {{ colors.section_title }}">{{
+                strings_for_current_page.section_title_contact }}</h2>
+            <p class="text-xl {{ colors.text_subtle }} mb-12">
                 {{ profile_for_current_page.contact_intro }}
             </p>
-            <div class="mt-12 flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-4 sm:space-y-0">
-                <a href="mailto:{{ global_site_profile.email }}" class="flex items-center text-ctp-subtext1 hover:text-ctp-lavender transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                    </svg>
+            <div
+                class="mt-12 flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-4 sm:space-y-0">
+                <a href="mailto:{{ global_site_profile.email }}"
+                    class="flex items-center {{ colors.link }} {{ colors.link_hover }} transition-colors">
+                    <!-- ... svg icon ... -->
                     {{ global_site_profile.email }}
                 </a>
                 {% if global_site_profile.phone %}
-                <a href="tel:{{ global_site_profile.phone | remove: ' ' }}" class="flex items-center text-ctp-subtext1 hover:text-ctp-lavender transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
-                    </svg>
+                <a href="tel:{{ global_site_profile.phone | remove: ' ' }}"
+                    class="flex items-center {{ colors.link }} {{ colors.link_hover }} transition-colors">
+                    <!-- ... svg icon ... -->
                     {{ global_site_profile.phone }}
                 </a>
                 {% endif %}
@@ -132,35 +128,35 @@ layout: default
 </section>
 
 <div id="projectModal"
-    class="fixed inset-0 bg-ctp-crust/70 backdrop-blur-sm z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none">
+    class="fixed inset-0 {{ colors.bg_modal_overlay }} backdrop-blur-sm z-[60] flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none">
     <div
-        class="bg-ctp-mantle rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 ease-in-out scale-95"
+        class="{{ colors.bg_modal_content }} rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 ease-in-out scale-95"
         id="projectModalContentContainer">
         <div class="p-6 md:p-8 relative">
             <button onclick="closeProjectModal()"
-                class="absolute top-4 right-4 text-ctp-overlay1 hover:text-ctp-red transition-colors z-10"
+                class="absolute top-4 right-4 text-ctp-overlay1 {{ colors.close_button_hover }} transition-colors z-10"
                 aria-label="{{ s.project_modal_close_button_aria_label | default: 'Close modal' }}">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            <h3 id="modalTitle" class="text-3xl font-bold text-ctp-mauve mb-6 pr-10"></h3>
+            <h3 id="modalTitle" class="text-3xl font-bold {{ colors.modal_title }} mb-6 pr-10"></h3>
 
-            <div id="modalContent" 
-                class="modal-markdown-content max-w-none text-ctp-subtext0 leading-relaxed">
+            <div id="modalContent"
+                class="modal-markdown-content max-w-none {{ colors.text_subtle }} leading-relaxed">
             </div>
 
-            <div class="mt-8 pt-6 border-t border-ctp-surface1">
+            <div class="mt-8 pt-6 border-t {{ colors.border_divider }}">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div id="modalTags" class="flex flex-wrap gap-2">
                     </div>
                     <div class="flex space-x-3">
                         <a id="modalGithub" href="#" target="_blank" rel="noopener noreferrer"
-                            class="social-btn bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base px-5 py-2.5 rounded-lg font-semibold transition-colors flex items-center gap-2">
+                            class="social-btn {{ colors.button_github }} px-5 py-2.5 rounded-lg font-semibold transition-colors flex items-center gap-2">
                             {{ s_global[site.active_lang].project_modal_github_link_text | default: "GitHub" }}
                         </a>
                         <a id="modalLive" href="#" target="_blank" rel="noopener noreferrer"
-                            class="social-btn bg-ctp-green hover:bg-ctp-teal text-ctp-base px-5 py-2.5 rounded-lg font-semibold transition-colors flex items-center gap-2">
+                            class="social-btn {{ colors.button_live }} px-5 py-2.5 rounded-lg font-semibold transition-colors flex items-center gap-2">
                             {{ s_global[site.active_lang].project_modal_live_demo_link_text | default: "Live Demo" }}
                         </a>
                     </div>

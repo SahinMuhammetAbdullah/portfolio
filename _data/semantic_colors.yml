@@ -1,0 +1,150 @@
+# Bu dosya, UI bileşenlerinin anlamsal rollerini her tema için belirli Tailwind sınıflarına eşler.
+# Örneğin, 'section_title' rolü Mocha temasında açık lavanta rengi iken, Latte temasında koyu leylak rengi olabilir.
+
+# ------------------------------------
+# Catppuccin Mocha (Koyu Tema - Standart)
+# ------------------------------------
+mocha:
+  # Metin Renkleri
+  text_main: "text-ctp-text"
+  text_subtle: "text-ctp-subtext1"
+  text_greeting: "text-ctp-text"
+  text_name_highlight: "text-ctp-lavender"
+  section_title: "text-ctp-lavender"
+  about_subtitle: "text-ctp-blue"
+  skill_title_1: "text-ctp-green"
+  skill_title_2: "text-ctp-blue"
+  skill_title_3: "text-ctp-mauve"
+  modal_title: "text-ctp-mauve"
+  link: "text-ctp-subtext1"
+  link_hover: "hover:text-ctp-lavender"
+  scroll_arrow: "text-ctp-lavender"
+  scroll_arrow_hover: "hover:text-ctp-blue"
+
+  # Arka Plan Renkleri
+  bg_page: "bg-ctp-base"
+  bg_section_alt: "bg-ctp-mantle"
+  bg_card: "bg-ctp-surface0"
+  bg_card_nested: "bg-ctp-surface1"
+  bg_modal_overlay: "bg-ctp-crust/70"
+  bg_modal_content: "bg-ctp-mantle"
+
+  # Kenarlık ve Diğer Renkler
+  border_profile_pic: "border-ctp-lavender"
+  border_divider: "border-ctp-surface1"
+  close_button_hover: "hover:text-ctp-red"
+
+  # Düğmeler (Tam sınıflar)
+  button_github: "bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base"
+  button_live: "bg-ctp-green hover:bg-ctp-teal text-ctp-base"
+
+# ------------------------------------
+# Catppuccin Latte (Açık Tema)
+# ------------------------------------
+latte:
+  # Metin Renkleri
+  text_main: "text-ctp-text"
+  text_subtle: "text-ctp-subtext1"
+  text_greeting: "text-ctp-text"
+  text_name_highlight: "text-ctp-mauve"
+  section_title: "text-ctp-mauve"
+  about_subtitle: "text-ctp-blue"
+  skill_title_1: "text-ctp-green"
+  skill_title_2: "text-ctp-blue"
+  skill_title_3: "text-ctp-lavender"
+  modal_title: "text-ctp-red"
+  link: "text-ctp-subtext1"
+  link_hover: "hover:text-ctp-mauve"
+  scroll_arrow: "text-ctp-mauve"
+  scroll_arrow_hover: "hover:text-ctp-blue"
+
+  # Arka Plan Renkleri
+  bg_page: "bg-ctp-base"
+  bg_section_alt: "bg-ctp-mantle"
+  bg_card: "bg-ctp-surface0"
+  bg_card_nested: "bg-ctp-surface1"
+  bg_modal_overlay: "bg-ctp-crust/70"
+  bg_modal_content: "bg-ctp-mantle"
+
+  # Kenarlık ve Diğer Renkler
+  border_profile_pic: "border-ctp-mauve"
+  border_divider: "border-ctp-surface1"
+  close_button_hover: "hover:text-ctp-red"
+
+  # Düğmeler (Tam sınıflar)
+  button_github: "bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base"
+  button_live: "bg-ctp-green hover:bg-ctp-teal text-ctp-base"
+
+# ------------------------------------
+# Catppuccin Frappé (Koyu Tema - Yumuşak)
+# ------------------------------------
+frappe:
+  # Metin Renkleri
+  text_main: "text-ctp-text"
+  text_subtle: "text-ctp-subtext1"
+  text_greeting: "text-ctp-text"
+  text_name_highlight: "text-ctp-lavender"
+  section_title: "text-ctp-lavender"
+  about_subtitle: "text-ctp-blue"
+  skill_title_1: "text-ctp-green"
+  skill_title_2: "text-ctp-blue"
+  skill_title_3: "text-ctp-mauve"
+  modal_title: "text-ctp-mauve"
+  link: "text-ctp-subtext1"
+  link_hover: "hover:text-ctp-lavender"
+  scroll_arrow: "text-ctp-lavender"
+  scroll_arrow_hover: "hover:text-ctp-blue"
+
+  # Arka Plan Renkleri
+  bg_page: "bg-ctp-base"
+  bg_section_alt: "bg-ctp-mantle"
+  bg_card: "bg-ctp-surface0"
+  bg_card_nested: "bg-ctp-surface1"
+  bg_modal_overlay: "bg-ctp-crust/70"
+  bg_modal_content: "bg-ctp-mantle"
+
+  # Kenarlık ve Diğer Renkler
+  border_profile_pic: "border-ctp-lavender"
+  border_divider: "border-ctp-surface1"
+  close_button_hover: "hover:text-ctp-red"
+
+  # Düğmeler (Tam sınıflar)
+  button_github: "bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base"
+  button_live: "bg-ctp-green hover:bg-ctp-teal text-ctp-base"
+
+# ------------------------------------
+# Catppuccin Macchiato (Koyu Tema - Canlı)
+# ------------------------------------
+macchiato:
+  # Metin Renkleri
+  text_main: "text-ctp-text"
+  text_subtle: "text-ctp-subtext1"
+  text_greeting: "text-ctp-text"
+  text_name_highlight: "text-ctp-lavender"
+  section_title: "text-ctp-lavender"
+  about_subtitle: "text-ctp-blue"
+  skill_title_1: "text-ctp-green"
+  skill_title_2: "text-ctp-blue"
+  skill_title_3: "text-ctp-mauve"
+  modal_title: "text-ctp-mauve"
+  link: "text-ctp-subtext1"
+  link_hover: "hover:text-ctp-lavender"
+  scroll_arrow: "text-ctp-lavender"
+  scroll_arrow_hover: "hover:text-ctp-blue"
+
+  # Arka Plan Renkleri
+  bg_page: "bg-ctp-base"
+  bg_section_alt: "bg-ctp-mantle"
+  bg_card: "bg-ctp-surface0"
+  bg_card_nested: "bg-ctp-surface1"
+  bg_modal_overlay: "bg-ctp-crust/70"
+  bg_modal_content: "bg-ctp-mantle"
+
+  # Kenarlık ve Diğer Renkler
+  border_profile_pic: "border-ctp-lavender"
+  border_divider: "border-ctp-surface1"
+  close_button_hover: "hover:text-ctp-red"
+
+  # Düğmeler (Tam sınıflar)
+  button_github: "bg-ctp-blue hover:bg-ctp-sapphire text-ctp-base"
+  button_live: "bg-ctp-green hover:bg-ctp-teal text-ctp-base"

@@ -101,7 +101,7 @@ parallel_localization: false
 #     bir temanın adıyla eşleşmelidir (örn: mocha, latte).
 # EN: Determines the active color palette for the site. The value must match
 #     the name of a theme in the _data/themes.yml file (e.g., mocha, latte).
-active_theme: "macchiato" # Burayı "latte" olarak değiştirerek açık temaya geçebilirsiniz. "mocha" ile koyu tamaya dönebilirsiniz
+active_theme: "latte" # Burayı "latte" olarak değiştirerek açık temaya geçebilirsiniz. "mocha" ile koyu tamaya dönebilirsiniz
 
 # TR: Tarayıcı sekmesi ve mobil cihazlarda adres çubuğu için tema rengi.
 # EN: Theme color for the browser UI, especially on mobile devices.
