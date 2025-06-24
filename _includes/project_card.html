@@ -1,41 +1,42 @@
 {% assign p = include.project %}
 {% assign card_lang = include.lang %}
 {% assign card_s = include.s %}
+{% comment %} index.html'den gelen 'colors' değişkenini burada da kullanıyoruz. {% endcomment %}
+{% assign colors = include.colors %}
 
-<div class="card-hover bg-ctp-surface0 rounded-2xl overflow-hidden glow-effect cursor-pointer"
-    onclick="openProjectModal('{{ p.id | slugify }}', '{{ card_lang }}');">
+<div class="card-hover {{ colors.card_bg }} rounded-2xl overflow-hidden glow-effect cursor-pointer"
+    onclick="openProjectModal('{{ p.id | slugify }}', '{{ card_lang }}', '{{ colors.card_tag_bg_modal }}', '{{ colors.card_tag_text_modal }}');">
     
     <div class="h-48 w-full relative overflow-hidden group">
         {% if p.cover_image and p.cover_image != "" %}
             <img src="{{ p.cover_image | relative_url }}" alt="{{ p.title | escape }} cover image" 
                  class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
         {% else %}
-            <div class="w-full h-full bg-gradient-to-br from-{{ p.image_gradient_from | default: 'ctp-blue' }} to-{{ p.image_gradient_to | default: 'ctp-sapphire' }}">
-            </div>
+            {% assign grad_from = p.image_gradient_from | default: "ctp-blue" %}
+            {% assign grad_to = p.image_gradient_to | default: "ctp-sapphire" %}
+            <div class="w-full h-full bg-gradient-to-br from-{{ grad_from }} to-{{ grad_to }}"></div>
         {% endif %}
         
         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300"></div>
         <div class="absolute bottom-4 left-4 text-white">
             <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
-                {% comment %} icon_class kontrolü ve Font Awesome ikonu {% endcomment %}
                 {% if p.icon_class and p.icon_class != "" %}
                     <i class="{{ p.icon_class }} fa-fw text-lg"></i>
                 {% else %}
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path
-                            d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path></svg>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path></svg>
                 {% endif %}
             </div>
         </div>
     </div>
 
     <div class="p-6">
-        <h3 class="text-xl font-semibold mb-2 text-ctp-text">{{ p.title | default: "Proje Başlığı Eksik" }}</h3>
-        <p class="text-ctp-subtext1 mb-4 text-sm">
+        <h3 class="text-xl font-semibold mb-2 {{ colors.card_title }}">{{ p.title | default: "Proje Başlığı Eksik" }}</h3>
+        <p class="{{ colors.card_description }} mb-4 text-sm">
             {{ p.short_description | default: "Kısa açıklama eksik." }}
         </p>
         <div class="flex flex-wrap gap-2">
             {% for tag_item in p.tags limit:3 %}
-            <span class="px-3 py-1 bg-ctp-blue/20 text-ctp-blue rounded-full text-xs">{{ tag_item }}</span>
+            <span class="px-3 py-1 {{ colors.card_tag_bg }} {{ colors.card_tag_text }} rounded-full text-xs">{{ tag_item }}</span>
             {% endfor %}
             {% if p.tags == nil or p.tags.size == 0 %}
             <span class="px-3 py-1 bg-ctp-overlay0/20 text-ctp-overlay0 rounded-full text-xs">Etiket Yok</span>

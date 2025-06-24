@@ -1,5 +1,6 @@
 # Bu dosya, UI bileşenlerinin anlamsal rollerini her tema için belirli Tailwind sınıflarına eşler.
 # Örneğin, 'section_title' rolü Mocha temasında açık lavanta rengi iken, Latte temasında koyu leylak rengi olabilir.
+# _config.yml dosyasındaki 'active_theme' ayarı, hangi bloğun kullanılacağını belirler.
 
 # ------------------------------------
 # Catppuccin Mocha (Koyu Tema - Standart)
@@ -20,7 +21,7 @@ mocha:
   link_hover: "hover:text-ctp-lavender"
   scroll_arrow: "text-ctp-lavender"
   scroll_arrow_hover: "hover:text-ctp-blue"
-
+  
   # Arka Plan Renkleri
   bg_page: "bg-ctp-base"
   bg_section_alt: "bg-ctp-mantle"
@@ -28,6 +29,16 @@ mocha:
   bg_card_nested: "bg-ctp-surface1"
   bg_modal_overlay: "bg-ctp-crust/70"
   bg_modal_content: "bg-ctp-mantle"
+  bg_hero: "bg-gradient-to-br from-ctp-crust to-ctp-base"
+
+  # Proje Kartları & Etiketleri
+  card_bg: "bg-ctp-surface0"
+  card_title: "text-ctp-text"
+  card_description: "text-ctp-subtext1"
+  card_tag_bg: "bg-ctp-blue/20"
+  card_tag_text: "text-ctp-blue"
+  card_tag_bg_modal: "bg-ctp-sky/20"
+  card_tag_text_modal: "text-ctp-sky"
 
   # Kenarlık ve Diğer Renkler
   border_profile_pic: "border-ctp-lavender"
@@ -65,6 +76,16 @@ latte:
   bg_card_nested: "bg-ctp-surface1"
   bg_modal_overlay: "bg-ctp-crust/70"
   bg_modal_content: "bg-ctp-mantle"
+  bg_hero: "bg-gradient-to-br from-ctp-mantle to-ctp-base"
+  
+  # Proje Kartları & Etiketleri
+  card_bg: "bg-ctp-surface0"
+  card_title: "text-ctp-text"
+  card_description: "text-ctp-subtext1"
+  card_tag_bg: "bg-ctp-blue/20"
+  card_tag_text: "text-ctp-blue"
+  card_tag_bg_modal: "bg-ctp-sapphire/20"
+  card_tag_text_modal: "text-ctp-sapphire"
 
   # Kenarlık ve Diğer Renkler
   border_profile_pic: "border-ctp-mauve"
@@ -94,7 +115,7 @@ frappe:
   link_hover: "hover:text-ctp-lavender"
   scroll_arrow: "text-ctp-lavender"
   scroll_arrow_hover: "hover:text-ctp-blue"
-
+  
   # Arka Plan Renkleri
   bg_page: "bg-ctp-base"
   bg_section_alt: "bg-ctp-mantle"
@@ -102,6 +123,16 @@ frappe:
   bg_card_nested: "bg-ctp-surface1"
   bg_modal_overlay: "bg-ctp-crust/70"
   bg_modal_content: "bg-ctp-mantle"
+  bg_hero: "bg-gradient-to-br from-ctp-crust to-ctp-base"
+
+  # Proje Kartları & Etiketleri
+  card_bg: "bg-ctp-surface0"
+  card_title: "text-ctp-text"
+  card_description: "text-ctp-subtext1"
+  card_tag_bg: "bg-ctp-blue/20"
+  card_tag_text: "text-ctp-blue"
+  card_tag_bg_modal: "bg-ctp-sapphire/20"
+  card_tag_text_modal: "text-ctp-sapphire"
 
   # Kenarlık ve Diğer Renkler
   border_profile_pic: "border-ctp-lavender"
@@ -131,7 +162,7 @@ macchiato:
   link_hover: "hover:text-ctp-lavender"
   scroll_arrow: "text-ctp-lavender"
   scroll_arrow_hover: "hover:text-ctp-blue"
-
+  
   # Arka Plan Renkleri
   bg_page: "bg-ctp-base"
   bg_section_alt: "bg-ctp-mantle"
@@ -139,6 +170,16 @@ macchiato:
   bg_card_nested: "bg-ctp-surface1"
   bg_modal_overlay: "bg-ctp-crust/70"
   bg_modal_content: "bg-ctp-mantle"
+  bg_hero: "bg-gradient-to-br from-ctp-crust to-ctp-base"
+
+  # Proje Kartları & Etiketleri
+  card_bg: "bg-ctp-surface0"
+  card_title: "text-ctp-text"
+  card_description: "text-ctp-subtext1"
+  card_tag_bg: "bg-ctp-blue/20"
+  card_tag_text: "text-ctp-blue"
+  card_tag_bg_modal: "bg-ctp-sky/20"
+  card_tag_text_modal: "text-ctp-sky"
 
   # Kenarlık ve Diğer Renkler
   border_profile_pic: "border-ctp-lavender"
