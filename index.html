@@ -4,7 +4,6 @@ layout: default
 {% assign current_page_lang = site.active_lang | default: site.default_lang %}
 {% assign strings_for_current_page = site.data.translations[current_page_lang] %}
 {% assign profile_for_current_page = site.data.profile[current_page_lang] %}
-{% assign social_for_current_page = site.data.social[current_page_lang] %}
 {% assign global_site_profile = site.data.profile %}
 
 <section id="home" class="gradient-bg min-h-screen flex items-center justify-center pt-20">
@@ -23,7 +22,7 @@ layout: default
             {{ profile_for_current_page.tagline }}
         </p>
         <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-12">
-            {% for social in site.data.social_for_current_page.links limit:4 %}
+            {% for social in site.data.social.links limit:4 %}
             <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer"
                class="social-btn bg-{{ social.bg_color }} hover:bg-{{ social.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold mb-2 sm:mb-0 flex items-center space-x-2">
                 <i class="{{ social.icon_class }} fa-fw"></i>
