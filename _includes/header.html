@@ -32,82 +32,93 @@
 
                 <!-- Dil Değiştirici (Desktop) - DÜZELTİLMİŞ VERSİYON -->
                 <div class="hidden md:flex items-center space-x-2 ml-4">
-                    {% for lang in site.languages %}
-                        {% if lang == current_active_lang %}
-                            <span class="text-ctp-lavender uppercase text-sm font-bold px-3 py-1 rounded-md bg-ctp-surface1">
-                                {{ lang }}
-                            </span>
-                        {% else %}
-                            {% capture lang_url %}
-                                {% if lang == site.default_lang %}
-                                    {% comment %} Ana dile geçiş - dil kodunu tamamen kaldır {% endcomment %}
-                                    {% assign clean_url = page.url | remove_first: '/' | remove_first: current_active_lang | remove_first: '/' %}
-                                    {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
-                                    {% if has_baseurl %}
-                                        {{ baseurl_prefix }}{{ clean_url }}
-                                    {% else %}
-                                        {{ clean_url }}
-                                    {% endif %}
-                                {% else %}
-                                    {% comment %} Diğer dillere geçiş - mevcut dil kodunu yeni dil koduyla değiştir {% endcomment %}
-                                    {% assign clean_url = page.url %}
-                                    {% if current_active_lang != site.default_lang %}
+                    <div class="flex items-center space-x-2"> <!-- Dil değiştiriciyi kendi div'ine aldım -->
+
+                        {% for lang in site.languages %}
+                            {% if lang == current_active_lang %}
+                                <span class="text-ctp-lavender uppercase text-sm font-bold px-3 py-1 rounded-md bg-ctp-surface1">
+                                    {{ lang }}
+                                </span>
+                            {% else %}
+                                {% capture lang_url %}
+                                    {% if lang == site.default_lang %}
+                                        {% comment %} Ana dile geçiş - dil kodunu tamamen kaldır {% endcomment %}
                                         {% assign clean_url = page.url | remove_first: '/' | remove_first: current_active_lang | remove_first: '/' %}
-                                    {% endif %}
-                                    {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
-                                    {% if has_baseurl %}
-                                        {{ baseurl_prefix }}/{{ lang }}{{ clean_url }}
+                                        {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
+                                        {% if has_baseurl %}
+                                            {{ baseurl_prefix }}{{ clean_url }}
+                                        {% else %}
+                                            {{ clean_url }}
+                                        {% endif %}
                                     {% else %}
-                                        /{{ lang }}{{ clean_url }}
+                                        {% comment %} Diğer dillere geçiş - mevcut dil kodunu yeni dil koduyla değiştir {% endcomment %}
+                                        {% assign clean_url = page.url %}
+                                        {% if current_active_lang != site.default_lang %}
+                                            {% assign clean_url = page.url | remove_first: '/' | remove_first: current_active_lang | remove_first: '/' %}
+                                        {% endif %}
+                                        {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
+                                        {% if has_baseurl %}
+                                            {{ baseurl_prefix }}/{{ lang }}{{ clean_url }}
+                                        {% else %}
+                                            /{{ lang }}{{ clean_url }}
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
-                            {% endcapture %}
-                            <a href="{{ lang_url | replace: '//', '/' | replace: ' ', '' }}"
-                               class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-3 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">
-                                {{ lang }}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
+                                {% endcapture %}
+                                <a href="{{ lang_url | replace: '//', '/' | replace: ' ', '' }}"
+                                class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-3 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">
+                                    {{ lang }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                        <!-- YENİ TEMA DEĞİŞTİRİCİYİ TAM OLARAK BURAYA EKLEYİN -->
+                    {% include theme_switcher_instance.html id="desktop" %}
+
                 </div>
             </div>
 
             <!-- Mobil Menü Butonu + Dil Değiştirici - Aynı düzeltme burada da uygulandı -->
             <div class="md:hidden flex items-center">
-                <div class="md:hidden flex items-center mr-4 space-x-2">
-                    {% for lang in site.languages %}
-                        {% if lang == current_active_lang %}
-                            <span class="text-ctp-lavender uppercase text-sm font-bold px-2 py-1 rounded-md bg-ctp-surface1">
-                                {{ lang }}
-                            </span>
-                        {% else %}
-                            {% capture lang_url %}
-                                {% if lang == site.default_lang %}
-                                    {% assign clean_url = page.url | remove_first: '/' | remove_first: current_active_lang | remove_first: '/' %}
-                                    {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
-                                    {% if has_baseurl %}
-                                        {{ baseurl_prefix }}{{ clean_url }}
-                                    {% else %}
-                                        {{ clean_url }}
-                                    {% endif %}
-                                {% else %}
-                                    {% assign clean_url = page.url %}
-                                    {% if current_active_lang != site.default_lang %}
+                <div class="md:hidden flex items-center mr-4 space-x-4"> <!-- NOT: space-x-2'yi space-x-4 yaptım -->
+
+                    <div class="md:hidden flex items-center mr-4 space-x-2">
+                        {% for lang in site.languages %}
+                            {% if lang == current_active_lang %}
+                                <span class="text-ctp-lavender uppercase text-sm font-bold px-2 py-1 rounded-md bg-ctp-surface1">
+                                    {{ lang }}
+                                </span>
+                            {% else %}
+                                {% capture lang_url %}
+                                    {% if lang == site.default_lang %}
                                         {% assign clean_url = page.url | remove_first: '/' | remove_first: current_active_lang | remove_first: '/' %}
-                                    {% endif %}
-                                    {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
-                                    {% if has_baseurl %}
-                                        {{ baseurl_prefix }}/{{ lang }}{{ clean_url }}
+                                        {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
+                                        {% if has_baseurl %}
+                                            {{ baseurl_prefix }}{{ clean_url }}
+                                        {% else %}
+                                            {{ clean_url }}
+                                        {% endif %}
                                     {% else %}
-                                        /{{ lang }}{{ clean_url }}
+                                        {% assign clean_url = page.url %}
+                                        {% if current_active_lang != site.default_lang %}
+                                            {% assign clean_url = page.url | remove_first: '/' | remove_first: current_active_lang | remove_first: '/' %}
+                                        {% endif %}
+                                        {% if clean_url == '' %}{% assign clean_url = '/' %}{% endif %}
+                                        {% if has_baseurl %}
+                                            {{ baseurl_prefix }}/{{ lang }}{{ clean_url }}
+                                        {% else %}
+                                            /{{ lang }}{{ clean_url }}
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
-                            {% endcapture %}
-                            <a href="{{ lang_url | replace: '//', '/' | replace: ' ', '' }}"
-                               class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-2 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">
-                                {{ lang }}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
+                                {% endcapture %}
+                                <a href="{{ lang_url | replace: '//', '/' | replace: ' ', '' }}"
+                                class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-2 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">
+                                    {{ lang }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% include theme_switcher_instance.html id="mobile" %}
+
                 </div>
                 <button id="mobile-menu-btn" class="text-ctp-text hover:text-ctp-lavender">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
