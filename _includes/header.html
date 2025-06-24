@@ -9,7 +9,7 @@
         <div class="flex justify-between items-center">
             <!-- Logo/Link -->
             <a href="{% if current_active_lang == site.default_lang %}{{ baseurl_prefix }}/{% else %}{{ baseurl_prefix }}/{{ current_active_lang }}/{% endif %}" 
-               class="text-2xl font-bold text-ctp-lavender">
+               class="text-2xl font-bold text-ctp-lavender hover:text-ctp-mauve transition-colors">
                 {{ site.data.profile.name | default: "Site Name" }}
             </a>
 
@@ -20,19 +20,20 @@
                 {% endfor %}
 
                 <div class="flex items-center space-x-2 ml-4">
-                    <!-- Dil Değiştirici (Desktop) -->
+                    <!-- Dil Değiştirici (Desktop) - SAĞLAM VERSİYON -->
                     <div class="flex items-center space-x-2">
-                        {% for lang in site.languages %}
-                            {% if lang == current_active_lang %}
-                                <span class="text-ctp-lavender uppercase text-sm font-bold px-3 py-1 rounded-md bg-ctp-surface1">{{ lang }}</span>
+                        {% for lang_option_arr in site.active_lang_options %}
+                            {% assign lang_code = lang_option_arr[0] %}
+                            {% assign lang_data = lang_option_arr[1] %}
+                            {% if lang_code == current_active_lang %}
+                                <span class="text-ctp-lavender uppercase text-sm font-bold px-3 py-1 rounded-md bg-ctp-surface1">{{ lang_code }}</span>
                             {% else %}
-                                {% capture lang_url %}{% if lang == site.default_lang %}{{ page.url | replace_first: current_active_lang, '' | prepend: site.baseurl }}{% else %}{{ page.url | replace_first: current_active_lang, lang | prepend: site.baseurl }}{% endif %}{% endcapture %}
-                                <a href="{{ lang_url | replace: '//', '/' }}" class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-3 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">{{ lang }}</a>
+                                <a href="{{ lang_data.url | relative_url }}" class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-3 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">{{ lang_code }}</a>
                             {% endif %}
                         {% endfor %}
                     </div>
                     
-                    <!-- YENİ: Tema Değiştirici (Desktop) -->
+                    <!-- Tema Değiştirici (Desktop) -->
                     {% include theme_switcher_instance.html id="desktop" %}
                 </div>
             </div>
@@ -40,19 +41,20 @@
             <!-- Mobil Menü Butonu + Kontroller -->
             <div class="md:hidden flex items-center">
                 <div class="flex items-center mr-4 space-x-4">
-                    <!-- Dil Değiştirici (Mobil) -->
+                    <!-- Dil Değiştirici (Mobil) - SAĞLAM VERSİYON -->
                      <div class="flex items-center space-x-2">
-                        {% for lang in site.languages %}
-                            {% if lang == current_active_lang %}
-                                <span class="text-ctp-lavender uppercase text-sm font-bold px-2 py-1 rounded-md bg-ctp-surface1">{{ lang }}</span>
+                        {% for lang_option_arr in site.active_lang_options %}
+                            {% assign lang_code = lang_option_arr[0] %}
+                            {% assign lang_data = lang_option_arr[1] %}
+                            {% if lang_code == current_active_lang %}
+                                <span class="text-ctp-lavender uppercase text-sm font-bold px-2 py-1 rounded-md bg-ctp-surface1">{{ lang_code }}</span>
                             {% else %}
-                                {% capture lang_url_mobile %}{% if lang == site.default_lang %}{{ page.url | replace_first: current_active_lang, '' | prepend: site.baseurl }}{% else %}{{ page.url | replace_first: current_active_lang, lang | prepend: site.baseurl }}{% endif %}{% endcapture %}
-                                <a href="{{ lang_url_mobile | replace: '//', '/' }}" class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-2 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">{{ lang }}</a>
+                                <a href="{{ lang_data.url | relative_url }}" class="hover:text-ctp-lavender transition-colors uppercase text-sm font-semibold px-2 py-1 rounded-md border border-ctp-surface1 hover:bg-ctp-surface1">{{ lang_code }}</a>
                             {% endif %}
                         {% endfor %}
                     </div>
 
-                    <!-- YENİ: Tema Değiştirici (Mobil) -->
+                    <!-- Tema Değiştirici (Mobil) -->
                     {% include theme_switcher_instance.html id="mobile" %}
                 </div>
 
@@ -90,7 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                // Eğer link bir sayfa içi link (#about gibi) ise, menüyü kapat.
+                // Diğer sayfalara giden linkler için sayfa zaten yenileneceğinden gerek yok.
+                if (link.getAttribute('href').startsWith('#')) {
+                    mobileMenu.classList.add('hidden');
+                }
             });
         });
     }
