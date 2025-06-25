@@ -33,7 +33,7 @@ mocha:
 
   # Proje Kartları & Etiketleri
   card_bg: "bg-ctp-surface0"
-  card_title: "text-ctp-text"
+  card_title: "text-ctp-sky"  # GÜNCELLENDİ
   card_description: "text-ctp-subtext1"
   card_tag_bg: "bg-ctp-blue/20"
   card_tag_text: "text-ctp-blue"
@@ -80,7 +80,7 @@ latte:
   
   # Proje Kartları & Etiketleri
   card_bg: "bg-ctp-surface0"
-  card_title: "text-ctp-text"
+  card_title: "text-ctp-sapphire"  # GÜNCELLENDİ
   card_description: "text-ctp-subtext1"
   card_tag_bg: "bg-ctp-blue/20"
   card_tag_text: "text-ctp-blue"
@@ -127,7 +127,7 @@ frappe:
 
   # Proje Kartları & Etiketleri
   card_bg: "bg-ctp-surface0"
-  card_title: "text-ctp-text"
+  card_title: "text-ctp-sky"  # GÜNCELLENDİ
   card_description: "text-ctp-subtext1"
   card_tag_bg: "bg-ctp-blue/20"
   card_tag_text: "text-ctp-blue"
@@ -174,7 +174,7 @@ macchiato:
 
   # Proje Kartları & Etiketleri
   card_bg: "bg-ctp-surface0"
-  card_title: "text-ctp-text"
+  card_title: "text-ctp-sky"  # GÜNCELLENDİ
   card_description: "text-ctp-subtext1"
   card_tag_bg: "bg-ctp-blue/20"
   card_tag_text: "text-ctp-blue"
