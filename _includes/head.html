@@ -35,6 +35,9 @@
         // Eğer bir seçim yoksa, _config.yml'deki varsayılan temayı kullanıyoruz.
         const preferredTheme = localStorage.getItem('portfolio_theme') || '{{ site.active_theme | default: "mocha" }}';
         
+        // YENİ VE KRİTİK SATIR: CSS'in hangi temayı kullanacağını bilmesi için <html> etiketini güncelliyoruz.
+        document.documentElement.setAttribute('data-theme', preferredTheme);
+        
         // 3. Adım: Tailwind'i, seçilen temaya göre yapılandırıyoruz.
         // Bu script, sayfanın geri kalanından önce çalıştığı için "yanıp sönme" (FOUC) olmaz.
         tailwind.config = {
@@ -44,9 +47,8 @@
                 }
             }
         };
-        document.documentElement.setAttribute('data-theme', preferredTheme);
-
-    </script>   
+    </script>
+    
     <link rel="stylesheet" href="{{ '/assets/css/all.min.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     {% feed_meta %}
