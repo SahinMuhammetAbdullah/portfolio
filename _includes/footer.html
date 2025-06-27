@@ -1,6 +1,7 @@
 {% assign current_active_lang = site.active_lang | default: site.default_lang | default: "tr" %}
 {% assign data_profile_for_footer = site.data.profile[current_active_lang] %}
 {% assign s_footer = site.data.translations[current_active_lang] %}
+{% assign social_links_for_footer = site.data.social[current_active_lang].links %}
 
 <footer class="bg-ctp-crust py-12 text-ctp-subtext0">
     <div class="container mx-auto px-6">
@@ -13,7 +14,7 @@
             </div>
 
             <div class="flex justify-center space-x-6 mb-8">
-                {% for social_link in site.data.social.links %}
+                {% for social_link in social_links_for_footer %}
                 <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer"
                    class="text-ctp-overlay1 hover:text-{{ social_link.hover_bg_color | default: 'ctp-blue' }} transition-colors"
                    aria-label="{{ social_link.name }}">
