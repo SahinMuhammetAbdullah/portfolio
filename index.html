@@ -28,22 +28,19 @@ layout: default
             {{ profile_for_current_page.tagline }}
         </p>
         
-        <!-- ============================================= -->
-        <!-- === SOSYAL LİNKLER BÖLÜMÜ - GÜNCELLENDİ === -->
-        <!-- ============================================= -->
         <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
             
-            {%- comment -%} Aktif dile göre doğru link listesini seçiyoruz {%- endcomment -%}
-            {%- assign social_links = site.data.social_links[current_page_lang].links -%}
+            {%- assign social_links_for_lang = site.data.social_links[current_page_lang] -%}
             
-            {%- comment -%} Artık limit yok, istediğiniz kadar link gösterebilirsiniz {%- endcomment -%}
-            {% for link in social_links %}
-            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
-                class="social-btn bg-{{ link.bg_color }} hover:bg-{{ link.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold flex items-center space-x-2">
-                <i class="{{ link.icon_class }} fa-fw"></i>
-                <span>{{ link.name }}</span>
-            </a>
-            {% endfor %}
+            {% if social_links_for_lang and social_links_for_lang.links %}
+                {% for link in social_links_for_lang.links %}
+                    <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+                        class="social-btn bg-{{ link.bg_color }} hover:bg-{{ link.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold flex items-center space-x-2">
+                        <i class="{{ link.icon_class }} fa-fw"></i>
+                        <span>{{ link.name }}</span>
+                    </a>
+                {% endfor %}
+            {% endif %}
         </div>
         
         <div class="animate-bounce">
@@ -56,7 +53,7 @@ layout: default
             </a>
         </div>
     </div>
-</section>
+   </section>
 
 <section id="about" class="py-20 {{ colors.bg_section_alt }}">
     <div class="container mx-auto px-6">
