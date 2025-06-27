@@ -27,6 +27,10 @@ layout: default
         <p class="text-xl md:text-2xl {{ colors.text_subtle }} mb-8">
             {{ profile_for_current_page.tagline }}
         </p>
+        
+        <!-- ============================================= -->
+        <!-- === SOSYAL LİNKLER BÖLÜMÜ - GÜNCELLENDİ === -->
+        <!-- ============================================= -->
         <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
             
             {%- comment -%} Aktif dile göre doğru link listesini seçiyoruz {%- endcomment -%}
@@ -41,6 +45,7 @@ layout: default
             </a>
             {% endfor %}
         </div>
+        
         <div class="animate-bounce">
             <a href="#about" class="{{ colors.scroll_arrow }} {{ colors.scroll_arrow_hover }} transition-colors"
                 aria-label="{{ strings_for_current_page.hero_scroll_aria_label }}">
