@@ -27,12 +27,17 @@ layout: default
         <p class="text-xl md:text-2xl {{ colors.text_subtle }} mb-8">
             {{ profile_for_current_page.tagline }}
         </p>
-        <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-12">
-            {% for social in site.data.social.links limit:4 %}
-            <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer"
-                class="social-btn bg-{{ social.bg_color }} hover:bg-{{ social.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold mb-2 sm:mb-0 flex items-center space-x-2">
-                <i class="{{ social.icon_class }} fa-fw"></i>
-                <span>{{ social.name }}</span>
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
+            
+            {%- comment -%} Aktif dile göre doğru link listesini seçiyoruz {%- endcomment -%}
+            {%- assign social_links = site.data.social_links[current_page_lang].links -%}
+            
+            {%- comment -%} Artık limit yok, istediğiniz kadar link gösterebilirsiniz {%- endcomment -%}
+            {% for link in social_links %}
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+                class="social-btn bg-{{ link.bg_color }} hover:bg-{{ link.hover_bg_color }} text-ctp-base px-6 py-3 rounded-full font-semibold flex items-center space-x-2">
+                <i class="{{ link.icon_class }} fa-fw"></i>
+                <span>{{ link.name }}</span>
             </a>
             {% endfor %}
         </div>
