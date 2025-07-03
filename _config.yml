@@ -201,4 +201,3 @@ exclude:
   - .vscode/
   # - "*.log" # Örnek
   # - "tmp/"  # Örnek
-

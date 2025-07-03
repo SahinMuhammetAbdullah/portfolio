@@ -33,6 +33,19 @@
                 <p>
                     {{ s_footer.footer_design_by | default: "Design by" }} <a href="{{ site.designer_url | default: '#' }}" target="_blank" rel="noopener noreferrer" class="text-ctp-pink hover:text-ctp-mauve hover:underline">{{ site.designer_name | default: site.author }}</a>.
                 </p>
+                {% if site.license_name and site.license_url %}
+                <p class="text-xs mt-2">
+                    {{ s_footer.footer_licensed_under | default: "Licensed under the" }}
+                    <a href="{{ site.license_url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-teal hover:text-ctp-green hover:underline">{{ site.license_name }}</a>.
+                </p>
+                {% endif %}
+                {% if site.repository_url %}
+                <p class="text-xs mt-2">
+                    <a href="{{ site.repository_url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sapphire hover:underline">
+                        {{ s_footer.footer_view_source | default: "View Source on GitHub" }} <i class="fab fa-github"></i>
+                    </a>
+                </p>
+                {% endif %}
             </div>
 
             <div class="border-t border-ctp-surface0 pt-8">
@@ -48,19 +61,7 @@
                         © {{ year_str_footer }} {{ name_str_footer }}. All rights reserved.
                     {% endif %}
                 </p>
-                {% if site.license_name and site.license_url %}
-                <p class="text-xs mt-2">
-                    {{ s_footer.footer_licensed_under | default: "Licensed under the" }}
-                    <a href="{{ site.license_url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-teal hover:text-ctp-green hover:underline">{{ site.license_name }}</a>.
-                </p>
-                {% endif %}
-                {% if site.repository_url %}
-                <p class="text-xs mt-2">
-                    <a href="{{ site.repository_url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sapphire hover:underline">
-                        {{ s_footer.footer_view_source | default: "View Source on GitHub" }} <i class="fab fa-github"></i>
-                    </a>
-                </p>
-                {% endif %}
+               
             </div>
         </div>
     </div>
