@@ -10,281 +10,109 @@
 */
 
 /* ==========================================================================
-   1. BÖLÜM: DİNAMİK RENK DEĞİŞKENLERİNİN OLUŞTURULMASI (HİYERARŞİ DÜZELTİLDİ)
+   1. BÖLÜM: DİNAMİK RENK DEĞİŞKENLERİNİN OLUŞTURULMASI
    ========================================================================== */
 
-   {%- for theme_arr in site.data.themes -%}
-   {%- assign theme_name = theme_arr[0] -%}
-   {%- assign t = theme_arr[1] -%}
- 
-   /* "{{ theme_name|capitalize }}" teması için renkler */
-   html[data-theme="{{ theme_name }}"] {
-     /* ... (Diğer değişkenleriniz aynı kalacak) ... */
- 
-     /* ========================================================== */
-     /* === Markdown İçerik Değişkenleri (YENİ HİYERARŞİ) === */
-     /* ========================================================== */
-     --modal-p-color: {{ t['ctp-subtext1'] }};
-     
-     /* h1 rengini tema adına göre özel olarak ata */
-     {%- if theme_name == 'latte' -%}
-         --modal-h1-color: {{ t['ctp-maroon'] }}; /* Açık temada daha okunaklı bir ana başlık */
-     {%- elsif theme_name == 'frappe' -%}
-         --modal-h1-color: {{ t['ctp-peach'] }};
-     {%- else -%}
-         --modal-h1-color: {{ t['ctp-mauve'] }}; /* Koyu temalar için ana başlık */
-     {%- endif -%}
- 
-     /* İkincil ve üçüncül başlıklar için yeni renk sıralaması */
-     --modal-h2-color: {{ t['ctp-red'] }};
-     --modal-h3-color: {{ t['ctp-peach'] }};
-     --modal-h4-color: {{ t['ctp-yellow'] }};
-     --modal-h5-color: {{ t['ctp-green'] }};
-     
-     /* Diğer Markdown elementleri */
-     --modal-h2-border-color: {{ t['ctp-surface1'] }};
-     --modal-a-color: {{ t['ctp-blue'] }};
-     --modal-list-color: {{ t['ctp-subtext1'] }};
-     --modal-strong-color: {{ t['ctp-text'] }};
-     --modal-code-bg: {{ t['ctp-surface0'] }};
-     --modal-code-text: {{ t['ctp-rosewater'] }};
-     --modal-pre-bg: {{ t['ctp-mantle'] }};
-     --modal-pre-text: {{ t['ctp-text'] }};
-     --modal-quote-border: {{ t['ctp-teal'] }};
-     --modal-quote-text: {{ t['ctp-subtext0'] }};
-   }
- {%- endfor -%}
+{%- for theme_arr in site.data.themes -%}
+  {%- assign theme_name = theme_arr[0] -%}
+  {%- assign t = theme_arr[1] -%}
+
+  /* "{{ theme_name|capitalize }}" teması için renkler */
+  html[data-theme="{{ theme_name }}"] {
+    /* Genel Stiller için Değişkenler */
+    {%- if theme_name == 'latte' -%}
+      --gradient-start: {{ t['ctp-mantle'] }};
+      --gradient-end: {{ t['ctp-base'] }};
+      --glow-color: {{ t['ctp-mauve'] }};
+    {%- else -%}
+      --gradient-start: {{ t['ctp-crust'] }};
+      --gradient-end: {{ t['ctp-base'] }};
+      --glow-color: {{ t['ctp-lavender'] }};
+    {%- endif -%}
+
+    /* Ana Sayfa Scrollbar Değişkenleri */
+    --scrollbar-track: {{ t['ctp-base'] }};
+    --scrollbar-thumb: {{ t['ctp-surface1'] }};
+    --scrollbar-thumb-hover: {{ t['ctp-surface2'] }};
+
+    /* YENİ: Modal Scrollbar Değişkenleri */
+    --modal-scrollbar-track: {{ t['ctp-mantle'] }};
+    --modal-scrollbar-thumb: {{ t['ctp-overlay0'] }};
+    --modal-scrollbar-thumb-hover: {{ t['ctp-overlay1'] }};
+    
+    /* Markdown İçerik Değişkenleri */
+    --modal-p-color: {{ t['ctp-subtext1'] }};
+    
+    {%- if theme_name == 'latte' -%}
+      --modal-h1-color: {{ t['ctp-maroon'] }};
+    {%- else -%}
+      --modal-h1-color: {{ t['ctp-mauve'] }};
+    {%- endif -%}
+
+    --modal-h2-color: {{ t['ctp-red'] }};
+    --modal-h3-color: {{ t['ctp-peach'] }};
+    --modal-h4-color: {{ t['ctp-yellow'] }};
+    --modal-h5-color: {{ t['ctp-green'] }};
+    
+    --modal-h2-border-color: {{ t['ctp-surface1'] }};
+    --modal-a-color: {{ t['ctp-blue'] }};
+    --modal-list-color: {{ t['ctp-subtext1'] }};
+    --modal-strong-color: {{ t['ctp-text'] }};
+    --modal-code-bg: {{ t['ctp-surface0'] }};
+    --modal-code-text: {{ t['ctp-rosewater'] }};
+    --modal-pre-bg: {{ t['ctp-mantle'] }};
+    --modal-pre-text: {{ t['ctp-text'] }};
+    --modal-quote-border: {{ t['ctp-teal'] }};
+    --modal-quote-text: {{ t['ctp-subtext0'] }};
+  }
+{%- endfor -%}
 
 /* ==========================================================================
    2. BÖLÜM: STATİK CSS KURALLARI
-   Bu kurallar, yukarıda oluşturulan dinamik değişkenleri kullanır.
    ========================================================================== */
+html { scroll-behavior: smooth; }
+.gradient-bg { background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%); }
+.card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.card-hover:hover { transform: translateY(-8px) scale(1.02); }
+.social-btn { transition: all 0.3s ease; }
+.social-btn:hover { transform: translateY(-2px); }
+.floating-animation { animation: float 6s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+.glow-effect { box-shadow: 0 0 20px color-mix(in srgb, var(--glow-color) 30%, transparent); transition: box-shadow 0.3s ease; }
+.glow-effect:hover { box-shadow: 0 0 30px color-mix(in srgb, var(--glow-color) 50%, transparent); }
 
-html {
-    scroll-behavior: smooth;
-}
-
-.gradient-bg {
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-}
-
-.card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-    transform: translateY(-8px) scale(1.02);
-}
-
-.social-btn {
-    transition: all 0.3s ease;
-}
-
-.social-btn:hover {
-    transform: translateY(-2px);
-}
-
-.floating-animation {
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-.glow-effect {
-    box-shadow: 0 0 20px color-mix(in srgb, var(--glow-color) 30%, transparent);
-    transition: box-shadow 0.3s ease;
-}
-
-.glow-effect:hover {
-    box-shadow: 0 0 30px color-mix(in srgb, var(--glow-color) 50%, transparent);
-}
-
-
-/* ==========================================================================
-   Proje Modalı - Markdown İçerik Stilleri
-   ========================================================================== */
-.modal-markdown-content h1,
-.modal-markdown-content h2,
-.modal-markdown-content h3,
-.modal-markdown-content h4,
-.modal-markdown-content h5,
-.modal-markdown-content h6 {
-    margin-top: 1.25em;
-    margin-bottom: 0.5em;
-    font-weight: 600;
-    line-height: 1.3;
-}
-
-.modal-markdown-content h1 {
-    font-size: 2.25rem;
-    color: var(--modal-h1-color);
-}
-
-.modal-markdown-content h2 {
-    font-size: 1.875rem;
-    color: var(--modal-h2-color);
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid var(--modal-h2-border-color);
-    margin-bottom: 0.8em;
-}
-
-.modal-markdown-content h3 {
-    font-size: 1.5rem;
-    color: var(--modal-h3-color);
-}
-
-.modal-markdown-content h4 {
-    font-size: 1.25rem;
-    color: var(--modal-h4-color);
-}
-
-.modal-markdown-content h5 {
-    font-size: 1.125rem;
-    color: var(--modal-h5-color);
-}
-
-.modal-markdown-content p {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
-    line-height: 1.65;
-    color: var(--modal-p-color);
-}
-
-.modal-markdown-content a {
-    color: var(--modal-a-color);
-    text-decoration: none;
-}
-
-.modal-markdown-content a:hover {
-    text-decoration: underline;
-}
-
-.modal-markdown-content ul,
-.modal-markdown-content ol {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
-    padding-left: 1.75em;
-    color: var(--modal-list-color);
-}
-
+/* Proje Modalı - Markdown İçerik Stilleri (Bu bölüm aynı kalıyor) */
+.modal-markdown-content h1, .modal-markdown-content h2, .modal-markdown-content h3, .modal-markdown-content h4, .modal-markdown-content h5, .modal-markdown-content h6 { margin-top: 1.25em; margin-bottom: 0.5em; font-weight: 600; line-height: 1.3; }
+.modal-markdown-content h1 { font-size: 2.25rem; color: var(--modal-h1-color); }
+.modal-markdown-content h2 { font-size: 1.875rem; color: var(--modal-h2-color); padding-bottom: 0.3em; border-bottom: 1px solid var(--modal-h2-border-color); margin-bottom: 0.8em; }
+.modal-markdown-content h3 { font-size: 1.5rem; color: var(--modal-h3-color); }
+.modal-markdown-content h4 { font-size: 1.25rem; color: var(--modal-h4-color); }
+.modal-markdown-content h5 { font-size: 1.125rem; color: var(--modal-h5-color); }
+.modal-markdown-content p { margin-top: 0.75em; margin-bottom: 0.75em; line-height: 1.65; color: var(--modal-p-color); }
+.modal-markdown-content a { color: var(--modal-a-color); text-decoration: none; }
+.modal-markdown-content a:hover { text-decoration: underline; }
+.modal-markdown-content ul, .modal-markdown-content ol { margin-top: 0.75em; margin-bottom: 0.75em; padding-left: 1.75em; color: var(--modal-list-color); }
 .modal-markdown-content ul { list-style-type: disc; }
 .modal-markdown-content ol { list-style-type: decimal; }
+.modal-markdown-content li { margin-top: 0.25em; margin-bottom: 0.25em; }
+.modal-markdown-content li > p { margin-top: 0; margin-bottom: 0; }
+.modal-markdown-content strong { color: var(--modal-strong-color); font-weight: 600; }
+.modal-markdown-content code { background-color: var(--modal-code-bg); color: var(--modal-code-text); padding: 0.2em 0.4em; font-size: 0.875em; border-radius: 0.25rem; }
+.modal-markdown-content pre { background-color: var(--modal-pre-bg); color: var(--modal-pre-text); padding: 1em; overflow-x: auto; border-radius: 0.375rem; margin-top: 1em; margin-bottom: 1em; }
+.modal-markdown-content pre code { background-color: transparent; padding: 0; font-size: inherit; color: inherit; }
+.modal-markdown-content blockquote { border-left: 0.25em solid var(--modal-quote-border); padding-left: 1em; margin-left: 0; margin-right: 0; font-style: italic; color: var(--modal-quote-text); }
+.modal-markdown-content img { max-width: 100%; height: auto; margin-top: 1.5em; margin-bottom: 1.5em; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
 
-.modal-markdown-content li {
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-}
+/* Temaya Duyarlı Scrollbar Stilleri */
+html { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); }
+body::-webkit-scrollbar { width: 10px; }
+body::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+body::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb); border-radius: 10px; border: 2px solid var(--scrollbar-track); }
+body::-webkit-scrollbar-thumb:hover { background-color: var(--scrollbar-thumb-hover); }
 
-.modal-markdown-content li > p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.modal-markdown-content strong {
-    color: var(--modal-strong-color);
-    font-weight: 600;
-}
-
-.modal-markdown-content code {
-    background-color: var(--modal-code-bg);
-    color: var(--modal-code-text);
-    padding: 0.2em 0.4em;
-    font-size: 0.875em;
-    border-radius: 0.25rem;
-}
-
-.modal-markdown-content pre {
-    background-color: var(--modal-pre-bg);
-    color: var(--modal-pre-text);
-    padding: 1em;
-    overflow-x: auto;
-    border-radius: 0.375rem;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.modal-markdown-content pre code {
-    background-color: transparent;
-    padding: 0;
-    font-size: inherit;
-    color: inherit;
-}
-
-.modal-markdown-content blockquote {
-    border-left: 0.25em solid var(--modal-quote-border);
-    padding-left: 1em;
-    margin-left: 0;
-    margin-right: 0;
-    font-style: italic;
-    color: var(--modal-quote-text);
-}
-
-.modal-markdown-content img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* ==========================================================================
-   Temaya Duyarlı Scrollbar Stilleri
-   ========================================================================== */
-
-/* Firefox için */
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-}
-
-/* Webkit tabanlı tarayıcılar için */
-body::-webkit-scrollbar {
-    width: 10px;
-}
-
-body::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
-    border-radius: 10px;
-    border: 2px solid var(--scrollbar-track);
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-thumb-hover);
-}
-
-/* Modal İçeriği Scrollbar Stilleri */
-#projectModalContentContainer {
-    scrollbar-width: thin;
-    scrollbar-color: var(--modal-scrollbar-thumb) var(--modal-scrollbar-track);
-}
-
-#projectModalContentContainer::-webkit-scrollbar {
-    width: 8px;
-}
-
-#projectModalContentContainer::-webkit-scrollbar-track {
-    background: var(--modal-scrollbar-track);
-    border-radius: 8px;
-}
-
-#projectModalContentContainer::-webkit-scrollbar-thumb {
-    background-color: var(--modal-scrollbar-thumb);
-    border-radius: 8px;
-    border: 2px solid var(--modal-scrollbar-track);
-}
-
-#projectModalContentContainer::-webkit-scrollbar-thumb:hover {
-    background-color: var(--modal-scrollbar-thumb-hover);
-}
+/* YENİ: Modal İçeriği Scrollbar Stilleri */
+#projectModalContentContainer { scrollbar-width: thin; scrollbar-color: var(--modal-scrollbar-thumb) var(--modal-scrollbar-track); }
+#projectModalContentContainer::-webkit-scrollbar { width: 8px; }
+#projectModalContentContainer::-webkit-scrollbar-track { background: var(--modal-scrollbar-track); border-radius: 8px; }
+#projectModalContentContainer::-webkit-scrollbar-thumb { background-color: var(--modal-scrollbar-thumb); border-radius: 8px; border: 2px solid var(--modal-scrollbar-track); }
+#projectModalContentContainer::-webkit-scrollbar-thumb:hover { background-color: var(--modal-scrollbar-thumb-hover); }
