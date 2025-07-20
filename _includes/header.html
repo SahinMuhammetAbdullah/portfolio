@@ -8,9 +8,8 @@
     <div class="container mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo/Link - BaseURL kontrolü ile -->
-            <a href="{% if current_active_lang == site.default_lang %}{{ baseurl_prefix }}/{% else %}{{ baseurl_prefix }}/{{ current_active_lang }}/{% endif %}" 
-               class="text-2xl font-bold text-ctp-lavender">
-                {{ site.data.profile.name | default: "Site Name" }}
+            <a href="{% if current_active_lang == site.default_lang %}{{ site.baseurl }}/{% else %}{{ site.baseurl }}/{{ current_active_lang }}/{% endif %}" class="text-2xl font-bold text-ctp-lavender hover:text-ctp-mauve transition-colors">
+                {{ profile.name }}
             </a>
 
             <!-- Desktop Menu -->

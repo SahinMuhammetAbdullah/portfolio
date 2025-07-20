@@ -70,6 +70,8 @@ multilingual_content:
           title: "Veritabanı & Diğer"
           items: "MongoDB, PostgreSQL, Docker, Git, Figma"
       contact_intro: "Bir proje hakkında konuşmak, bir soru sormak veya sadece merhaba demek isterseniz, bana ulaşmaktan çekinmeyin. Fırsatları ve yeni fikirleri tartışmaya her zaman açığım."
+      footer_tagline: "Full Stack Developer & UI/UX Designer"
+      footer_copyright: "© {{ current_year }} {{ site_profile_name }}. Bazı hakları saklıdır."
     navigation_links:
       - title: "Hakkımda"
         url: "#about"
@@ -97,6 +99,8 @@ multilingual_content:
           title: "Database & Others"
           items: "MongoDB, PostgreSQL, Docker, Git, Figma"
       contact_intro: "Feel free to reach out if you want to talk about a project, ask a question, or just say hello. I'm always open to discussing opportunities and new ideas."
+      footer_tagline: "Full Stack Developer & UI/UX Designer"
+      footer_copyright: "© {{ current_year }} {{ site_profile_name }}. Some rights reserved."
     navigation_links:
       - title: "About"
         url: "#about"
