@@ -22,26 +22,23 @@
 {%- endcapture -%}
 
 <script>
+    // This script now only defines the data and the functions.
+    // It does NOT execute anything or add event listeners.
     const allProjectsData = {{ project_data_json }};
     const modalContentEl = document.getElementById('modalContent');
     const modalTagsEl = document.getElementById('modalTags');
     const modalGithubEl = document.getElementById('modalGithub');
     const modalLiveEl = document.getElementById('modalLive');
     const projectModal = document.getElementById('projectModal');
-    const projectModalContentContainer = document.getElementById('projectModalContentContainer');
     const modalTitleEl = document.getElementById('modalTitle');
 
     function openProjectModal(projectId, lang, tagBgClass, tagTextClass) {
-        if (!allProjectsData || !allProjectsData[lang]) {
-            return;
-        }
-
+        if (!allProjectsData || !allProjectsData[lang]) return;
         const project = allProjectsData[lang].projects.find(p => p.id === projectId);
         if (project) {
-            modalTitleEl.textContent = project.title || "Başlık Yok";
-            modalContentEl.innerHTML = project.content || "<p>İçerik bulunamadı.</p>";
+            modalTitleEl.textContent = project.title || "Untitled";
+            modalContentEl.innerHTML = project.content || "<p>No content available.</p>";
             modalTagsEl.innerHTML = '';
-
             if (project.tags && project.tags.length > 0) {
                 project.tags.forEach(tag => {
                     const tagElement = document.createElement('span');
@@ -50,49 +47,24 @@
                     modalTagsEl.appendChild(tagElement);
                 });
             }
-
             modalGithubEl.href = project.github || '#';
             modalLiveEl.href = project.live || '#';
-
             modalGithubEl.style.display = project.github ? 'inline-flex' : 'none';
             modalLiveEl.style.display = project.live ? 'inline-flex' : 'none';
-
-            // Modalı göster
             projectModal.classList.remove('opacity-0', 'pointer-events-none');
-            projectModalContentContainer.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
         }
     }
 
     function closeProjectModal() {
-        if (!projectModal || !projectModalContentContainer) return;
+        if (!projectModal) return;
         projectModal.classList.add('opacity-0');
-        projectModalContentContainer.classList.add('scale-95');
         setTimeout(() => {
             projectModal.classList.add('pointer-events-none');
             document.body.style.overflow = 'auto';
         }, 300);
     }
 
-    if (projectModal) {
-        const modalContentContainer = document.getElementById('projectModalContentContainer');
-
-        // Modal içeriğine tıklamayı yayılmadan engelle
-        if (modalContentContainer) {
-            modalContentContainer.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-        }
-
-        // 🔧 Ana düzeltme: Sadece overlay'e tıklanırsa modal kapanır
-        projectModal.addEventListener('click', (event) => {
-            if (event.target === projectModal) {
-                closeProjectModal();
-            }
-        });
-    }
-
-    // Escape tuşuyla modal kapatma
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('opacity-0')) {
             closeProjectModal();
