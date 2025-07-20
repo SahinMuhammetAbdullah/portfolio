@@ -35,6 +35,7 @@
         if (!allProjectsData || !allProjectsData[lang]) {
             return;
         }
+    
         const project = allProjectsData[lang].projects.find(p => p.id === projectId);
         if (project) {
             modalTitleEl.textContent = project.title || "Başlık Yok";
@@ -48,19 +49,28 @@
                     modalTagsEl.appendChild(tagElement);
                 });
             }
-            
-            // Bu bölüm artık doğru veriyi alacak
+    
+            // Linkleri ayarla
             modalGithubEl.href = project.github || '#';
             modalLiveEl.href = project.live || '#';
-            
             modalGithubEl.style.display = project.github ? 'inline-flex' : 'none';
             modalLiveEl.style.display = project.live ? 'inline-flex' : 'none';
-            
+    
+            // Her açılışta olayları tekrar bağla
+            modalGithubEl.onclick = (e) => {
+                e.stopPropagation();
+            };
+            modalLiveEl.onclick = (e) => {
+                e.stopPropagation();
+            };
+    
+            // Modal'ı aç
             projectModal.classList.remove('opacity-0', 'pointer-events-none');
             projectModalContentContainer.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
         }
     }
+    
     
     function closeProjectModal() {
         if (!projectModal || !projectModalContentContainer) return;
