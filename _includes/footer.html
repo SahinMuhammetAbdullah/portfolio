@@ -1,22 +1,28 @@
-{% assign current_active_lang = site.active_lang | default: site.default_lang | default: "tr" %}
-{% assign data_profile_for_footer = site.data.profile[current_active_lang] %}
-{% assign s_footer = site.data.translations[current_active_lang] %}
-{% assign social_links_for_footer = site.data.social[current_active_lang].links %}
+{%- assign current_page_lang = site.active_lang | default: site.default_lang -%}
+{%- assign s = site.data.site_settings.multilingual_content[current_page_lang] -%}
+{%- assign profile = site.data.site_settings.profile -%}
+{%- assign social_links = site.data.site_settings.social_links -%}
+{%- assign s_global = site.data.translations[current_page_lang] -%}
+{%- assign colors = site.data.semantic_colors[site.active_theme | default: "mocha"] -%}
 
-<footer class="bg-ctp-crust py-12 text-ctp-subtext0">
+<footer class="{{ colors.bg_page | replace: 'bg-', 'border-t border-' }} bg-ctp-crust py-12 text-ctp-subtext0">
     <div class="container mx-auto px-6">
         <div class="text-center">
             <div class="mb-8">
-                <h3 class="text-2xl font-bold text-ctp-lavender mb-4">{{ site.data.profile.name }}</h3>
-                {% if data_profile_for_footer and data_profile_for_footer.footer_tagline %}
-                    <p>{{ data_profile_for_footer.footer_tagline }}</p>
+                <!-- DEĞİŞİKLİK: Veri yolu güncellendi -->
+                <h3 class="text-2xl font-bold text-ctp-lavender mb-4">{{ profile.name }}</h3>
+                
+                <!-- DEĞİŞİKLİK: Yeni footer_tagline verisi çekiliyor -->
+                {% if s.profile.footer_tagline %}
+                    <p>{{ s.profile.footer_tagline }}</p>
                 {% endif %}
             </div>
 
             <div class="flex justify-center space-x-6 mb-8">
-                {% for social_link in social_links_for_footer %}
+                <!-- DEĞİŞİKLİK: Veri yolu güncellendi -->
+                {% for social_link in social_links %}
                 <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer"
-                   class="text-ctp-overlay1 hover:text-{{ social_link.hover_bg_color | default: 'ctp-blue' }} transition-colors"
+                   class="text-ctp-overlay1 hover:text-ctp-lavender transition-colors"
                    aria-label="{{ social_link.name }}">
                     <i class="{{ social_link.icon_class }} fa-fw fa-lg"></i>
                 </a>
@@ -24,44 +30,45 @@
             </div>
 
             <div class="border-t border-ctp-surface0 pt-8 text-sm mb-6">
+                <!-- Bu bölümdeki veriler _config.yml ve translations.yml'den geldiği için doğru çalışıyor -->
                 <p>
-                    {{ s_footer.footer_built_with | default: "Built with" }}
+                    {{ s_global.footer_built_with | default: "Built with" }}
                     {% for tech in site.technologies_used %}
                         <a href="{{ tech.url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-sky hover:text-ctp-blue hover:underline">{{ tech.name }}</a>{% unless forloop.last %}, {% endunless %}
                     {% endfor %}.
                 </p>
                 <p>
-                    {{ s_footer.footer_design_by | default: "Design by" }} <a href="{{ site.designer_url | default: '#' }}" target="_blank" rel="noopener noreferrer" class="text-ctp-pink hover:text-ctp-mauve hover:underline">{{ site.designer_name | default: site.author }}</a>.
+                    {{ s_global.footer_design_by | default: "Design by" }} <a href="{{ site.designer_url | default: '#' }}" target="_blank" rel="noopener noreferrer" class="text-ctp-pink hover:text-ctp-mauve hover:underline">{{ site.designer_name | default: site.author }}</a>.
                 </p>
                 {% if site.license_name and site.license_url %}
                 <p class="text-xs mt-2">
-                    {{ s_footer.footer_licensed_under | default: "Licensed under the" }}
+                    {{ s_global.footer_licensed_under | default: "Licensed under the" }}
                     <a href="{{ site.license_url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-teal hover:text-ctp-green hover:underline">{{ site.license_name }}</a>.
                 </p>
                 {% endif %}
                 {% if site.repository_url %}
                 <p class="text-xs mt-2">
                     <a href="{{ site.repository_url }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sapphire hover:underline">
-                        {{ s_footer.footer_view_source | default: "View Source on GitHub" }} <i class="fab fa-github"></i>
+                        {{ s_global.footer_view_source | default: "View Source on GitHub" }} <i class="fab fa-github"></i>
                     </a>
                 </p>
                 {% endif %}
             </div>
 
-            <div class="border-ctp-surface0 pt-8">
+            <div class="border-t border-ctp-surface0 pt-8">
                 <p class="text-sm">
-                    {% assign year_str_footer = site.time | date: '%Y' %}
-                    {% assign name_str_footer = site.data.profile.name %}
-                    {% if data_profile_for_footer and data_profile_for_footer.footer_copyright %}
-                        {% assign copyright_template_footer = data_profile_for_footer.footer_copyright %}
-                        {% assign final_copyright_footer = copyright_template_footer | replace: '{{ current_year }}', year_str_footer %}
-                        {% assign final_copyright_footer = final_copyright_footer | replace: '{{ site_profile_name }}', name_str_footer %}
-                        {{ final_copyright_footer }}
+                    <!-- DEĞİŞİKLİK: Yeni footer_copyright verisi ve mantığı kullanılıyor -->
+                    {% assign year_str = site.time | date: '%Y' %}
+                    {% assign name_str = profile.name %}
+                    {% if s.profile.footer_copyright %}
+                        {% assign copyright_template = s.profile.footer_copyright %}
+                        {% assign final_copyright = copyright_template | replace: '{{ current_year }}', year_str %}
+                        {% assign final_copyright = final_copyright | replace: '{{ site_profile_name }}', name_str %}
+                        {{ final_copyright }}
                     {% else %}
-                        © {{ year_str_footer }} {{ name_str_footer }}. All rights reserved.
+                        © {{ year_str }} {{ name_str }}. All rights reserved.
                     {% endif %}
                 </p>
-               
             </div>
         </div>
     </div>
