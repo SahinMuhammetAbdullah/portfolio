@@ -73,8 +73,18 @@
     }
 
     if(projectModal) {
-        projectModal.addEventListener('click', (e) => {
-            if (e.target.id === 'projectModal') closeProjectModal();
+        const modalContentContainer = document.getElementById('projectModalContentContainer');
+    
+        // İçerik konteynerine yapılan tıklamaların, üst katmana yayılmasını engelle
+        if (modalContentContainer) {
+            modalContentContainer.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+        }
+        
+        // Sadece dışarıdaki overlay'e tıklandığında modalı kapat
+        projectModal.addEventListener('click', () => {
+            closeProjectModal();
         });
     }
 
