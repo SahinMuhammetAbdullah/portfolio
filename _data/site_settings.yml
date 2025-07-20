@@ -1,0 +1,106 @@
+# =============================================================================
+# ANA AYARLAR DOSYASI
+# TR: Sitenizin tüm kişisel bilgilerini bu tek dosyadan yönetebilirsiniz.
+# EN: You can manage all your site's personal information from this single file.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Profil Bilgileri
+# TR: Sitenin sahibi hakkında genel bilgiler. Avatar, isim, e-posta vb.
+# EN: General information about the site owner. Avatar, name, email, etc.
+# -----------------------------------------------------------------------------
+profile:
+  name: "Muhammet Abdullah Şahin"
+  email: "sahinmuhammetabdullah@gmail.com"
+  phone: "+90 555 123 4567" # İsteğe bağlı
+  avatar: "/assets/images/profile.png"
+
+# -----------------------------------------------------------------------------
+# Sosyal Medya Linkleri
+# TR: Sitenizde görünecek sosyal medya ikonları ve linkleri.
+# EN: Social media icons and links to be displayed on your site.
+# -----------------------------------------------------------------------------
+social_links:
+  - name: "GitHub"
+    url: "https://github.com/SahinMuhammetAbdullah"
+    bg_color: "ctp-blue"
+    hover_bg_color: "ctp-sapphire"
+    icon_class: "fab fa-github"
+  - name: "LinkedIn"  
+    url: "https://linkedin.com/in/muhammet-abdullah-sahin"
+    bg_color: "ctp-mauve"
+    hover_bg_color: "ctp-pink"
+    icon_class: "fab fa-linkedin"
+  - name: "Resume" 
+    url: "https://cv.masahin.dev"
+    bg_color: "ctp-green"
+    hover_bg_color: "ctp-teal"
+    icon_class: "fas fa-file-lines"
+  - name: "Blog"  
+    url: "https://blog.masahin.dev"
+    bg_color: "ctp-red"
+    hover_bg_color: "ctp-maroon"
+    icon_class: "fas fa-blog"
+  # - name: "Website"
+  #   url: "https://sahinmuhammetabdullah.github.io/"
+  #   icon_class: "fas fa-globe"
+
+# -----------------------------------------------------------------------------
+# Çok Dilli İçerikler
+# TR: Bu bölüm, farklı dillerde gösterilecek metinleri içerir.
+# EN: This section contains texts to be displayed in different languages.
+# -----------------------------------------------------------------------------
+multilingual_content:
+  # TÜRKÇE İÇERİKLER
+  tr:
+    profile:
+      greeting_intro: "Merhaba, ben"
+      tagline: "Full Stack Geliştirici & UI/UX Tasarımcısı"
+      about_title: "Ben Kimim?"
+      about_bio_1: "Teknolojiye ve tasarıma tutkuyla bağlı bir Full Stack Geliştiriciyim. Hem kullanıcı dostu arayüzler tasarlamaktan hem de bu tasarımları hayata geçiren sağlam sunucu altyapıları oluşturmaktan keyif alıyorum."
+      about_bio_2: "Her projede, temiz kod yazma prensiplerini ve en iyi kullanıcı deneyimini sunmayı hedeflerim."
+      skills:
+        frontend:
+          title: "Ön Yüz (Frontend)"
+          items: "HTML5, CSS3, JavaScript (ES6+), React, Next.js, Tailwind CSS, SASS"
+        backend:
+          title: "Arka Yüz (Backend)"
+          items: "Node.js, Express.js, RESTful API, GraphQL"
+        database:
+          title: "Veritabanı & Diğer"
+          items: "MongoDB, PostgreSQL, Docker, Git, Figma"
+      contact_intro: "Bir proje hakkında konuşmak, bir soru sormak veya sadece merhaba demek isterseniz, bana ulaşmaktan çekinmeyin. Fırsatları ve yeni fikirleri tartışmaya her zaman açığım."
+    navigation_links:
+      - title: "Hakkımda"
+        url: "#about"
+      - title: "Projeler"
+        url: "#projects"
+      - title: "İletişim"
+        url: "#contact"
+
+  # İNGİLİZCE İÇERİKLER
+  en:
+    profile:
+      greeting_intro: "Hi, I'm"
+      tagline: "Full Stack Developer & UI/UX Designer"
+      about_title: "Who I Am?"
+      about_bio_1: "I am a Full Stack Developer with a passion for technology and design. I enjoy both designing user-friendly interfaces and building the robust server infrastructures that bring these designs to life."
+      about_bio_2: "In every project, I aim to follow clean code principles and deliver the best user experience."
+      skills:
+        frontend:
+          title: "Frontend"
+          items: "HTML5, CSS3, JavaScript (ES6+), React, Next.js, Tailwind CSS, SASS"
+        backend:
+          title: "Backend"
+          items: "Node.js, Express.js, RESTful API, GraphQL"
+        database:
+          title: "Database & Others"
+          items: "MongoDB, PostgreSQL, Docker, Git, Figma"
+      contact_intro: "Feel free to reach out if you want to talk about a project, ask a question, or just say hello. I'm always open to discussing opportunities and new ideas."
+    navigation_links:
+      - title: "About"
+        url: "#about"
+      - title: "Projects"
+        url: "#projects"
+      - title: "Contact"
+        url: "#contact"

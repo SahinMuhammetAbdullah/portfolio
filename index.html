@@ -2,9 +2,8 @@
 layout: default
 ---
 {%- assign current_page_lang = site.active_lang | default: site.default_lang -%}
-{%- assign strings_for_current_page = site.data.translations[current_page_lang] -%}
-{%- assign profile_for_current_page = site.data.profile[current_page_lang] -%}
-{%- assign global_site_profile = site.data.profile -%}
+{%- assign s = site.data.site_settings.multilingual_content[current_page_lang] -%}
+{%- assign profile = site.data.site_settings.profile -%}
 {%- assign s_global = site.data.translations -%}
 {%- assign social_links_for_current_page = site.data.social[current_page_lang].links -%}
 

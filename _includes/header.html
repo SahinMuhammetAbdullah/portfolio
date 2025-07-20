@@ -1,5 +1,5 @@
 {% assign current_active_lang = site.active_lang | default: site.default_lang %}
-{% assign nav_links = site.data.navigation[current_active_lang] %}
+{% assign nav_links = site.data.site_settings.multilingual_content[current_active_lang].navigation_links %}
 {% assign s = site.data.translations[current_active_lang] %}
 {% assign baseurl_prefix = site.baseurl | default: '' %}
 {% assign has_baseurl = baseurl_prefix != '' %}
