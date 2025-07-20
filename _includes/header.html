@@ -3,13 +3,14 @@
 {% assign s = site.data.translations[current_active_lang] %}
 {% assign baseurl_prefix = site.baseurl | default: '' %}
 {% assign has_baseurl = baseurl_prefix != '' %}
+{% assign profile = site.data.site_settings.profile %}
 
 <nav class="fixed top-0 w-full bg-ctp-base/95 backdrop-blur-sm border-b border-ctp-surface0 z-50">
     <div class="container mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo/Link - BaseURL kontrolü ile -->
             <a href="{% if current_active_lang == site.default_lang %}{{ site.baseurl }}/{% else %}{{ site.baseurl }}/{{ current_active_lang }}/{% endif %}" class="text-2xl font-bold text-ctp-lavender hover:text-ctp-mauve transition-colors">
-                {{ profile.name }}
+                {{ profile.name | default: 'Portfolio'}}
             </a>
 
             <!-- Desktop Menu -->
