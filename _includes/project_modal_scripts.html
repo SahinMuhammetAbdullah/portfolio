@@ -72,29 +72,37 @@
         }, 300);
     }
 
-    if(projectModal) {
+    if (projectModal) {
         const modalContentContainer = document.getElementById('projectModalContentContainer');
+        const modalGithubEl = document.getElementById('modalGithub');
+        const modalLiveEl = document.getElementById('modalLive');
     
-        // Modal içeriğine tıklamaların modalı kapatmasını engelle
+        // Modal içeriğine tıklamayı yayılmadan engelle
         if (modalContentContainer) {
             modalContentContainer.addEventListener('click', (event) => {
-                // Eğer tıklanan öğe bir bağlantı (a etiketi) ise, işleme devam et
-                if (event.target.tagName === 'A' || event.target.closest('a')) {
-                    return;
-                }
-                // Diğer tüm tıklamaları durdur
                 event.stopPropagation();
             });
         }
-        
-        // Sadece dışarıdaki overlay'e tıklandığında modalı kapat
-        projectModal.addEventListener('click', (event) => {
-            // Eğer tıklanan öğe modal içeriği değilse (overlay'e tıklandıysa)
-            if (event.target === projectModal) {
-                closeProjectModal();
-            }
+    
+        // Github ve Live butonlarına tıklama yayılmasın
+        if (modalGithubEl) {
+            modalGithubEl.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+        }
+    
+        if (modalLiveEl) {
+            modalLiveEl.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+        }
+    
+        // Dışarıya tıklanınca modal kapanır
+        projectModal.addEventListener('click', () => {
+            closeProjectModal();
         });
     }
+    
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('opacity-0')) {
