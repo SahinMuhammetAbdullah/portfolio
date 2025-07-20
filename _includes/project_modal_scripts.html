@@ -30,17 +30,18 @@
     const projectModal = document.getElementById('projectModal');
     const projectModalContentContainer = document.getElementById('projectModalContentContainer');
     const modalTitleEl = document.getElementById('modalTitle');
-    
+
     function openProjectModal(projectId, lang, tagBgClass, tagTextClass) {
         if (!allProjectsData || !allProjectsData[lang]) {
             return;
         }
-    
+
         const project = allProjectsData[lang].projects.find(p => p.id === projectId);
         if (project) {
             modalTitleEl.textContent = project.title || "Başlık Yok";
             modalContentEl.innerHTML = project.content || "<p>İçerik bulunamadı.</p>";
             modalTagsEl.innerHTML = '';
+
             if (project.tags && project.tags.length > 0) {
                 project.tags.forEach(tag => {
                     const tagElement = document.createElement('span');
@@ -49,29 +50,20 @@
                     modalTagsEl.appendChild(tagElement);
                 });
             }
-    
-            // Linkleri ayarla
+
             modalGithubEl.href = project.github || '#';
             modalLiveEl.href = project.live || '#';
+
             modalGithubEl.style.display = project.github ? 'inline-flex' : 'none';
             modalLiveEl.style.display = project.live ? 'inline-flex' : 'none';
-    
-            // Her açılışta olayları tekrar bağla
-            modalGithubEl.onclick = (e) => {
-                e.stopPropagation();
-            };
-            modalLiveEl.onclick = (e) => {
-                e.stopPropagation();
-            };
-    
-            // Modal'ı aç
+
+            // Modalı göster
             projectModal.classList.remove('opacity-0', 'pointer-events-none');
             projectModalContentContainer.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
         }
     }
-    
-    
+
     function closeProjectModal() {
         if (!projectModal || !projectModalContentContainer) return;
         projectModal.classList.add('opacity-0');
@@ -84,36 +76,23 @@
 
     if (projectModal) {
         const modalContentContainer = document.getElementById('projectModalContentContainer');
-        const modalGithubEl = document.getElementById('modalGithub');
-        const modalLiveEl = document.getElementById('modalLive');
-    
+
         // Modal içeriğine tıklamayı yayılmadan engelle
         if (modalContentContainer) {
             modalContentContainer.addEventListener('click', (event) => {
                 event.stopPropagation();
             });
         }
-    
-        // Github ve Live butonlarına tıklama yayılmasın
-        if (modalGithubEl) {
-            modalGithubEl.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-        }
-    
-        if (modalLiveEl) {
-            modalLiveEl.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-        }
-    
-        // Dışarıya tıklanınca modal kapanır
-        projectModal.addEventListener('click', () => {
-            closeProjectModal();
+
+        // 🔧 Ana düzeltme: Sadece overlay'e tıklanırsa modal kapanır
+        projectModal.addEventListener('click', (event) => {
+            if (event.target === projectModal) {
+                closeProjectModal();
+            }
         });
     }
-    
 
+    // Escape tuşuyla modal kapatma
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('opacity-0')) {
             closeProjectModal();
