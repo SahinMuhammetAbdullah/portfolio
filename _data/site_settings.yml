@@ -11,6 +11,7 @@
 # -----------------------------------------------------------------------------
 profile:
   name: "Muhammet Abdullah Şahin"
+  short_name: "M. A. Şahin" 
   email: "sahinmuhammetabdullah@gmail.com"
   phone: "+90 555 123 4567" # İsteğe bağlı
   avatar: "/assets/images/profile.png"

@@ -10,7 +10,11 @@
         <div class="flex justify-between items-center">
             <!-- Logo/Link - BaseURL kontrolü ile -->
             <a href="{% if current_active_lang == site.default_lang %}{{ site.baseurl }}/{% else %}{{ site.baseurl }}/{{ current_active_lang }}/{% endif %}" class="text-2xl font-bold text-ctp-lavender hover:text-ctp-mauve transition-colors">
-                {{ profile.name | default: 'Portfolio'}}
+                <!-- Mobil için kısa isim (md ve üstü ekranlarda gizlenir) -->
+                <span class="block md:hidden">{{ profile.short_name | default: profile.name }}</span>
+                
+                <!-- Masaüstü için tam isim (sadece md ve üstü ekranlarda gösterilir) -->
+                <span class="hidden md:block">{{ profile.name }}</span>
             </a>
 
             <!-- Desktop Menu -->
