@@ -10,10 +10,10 @@
 # EN: General information about the site owner. Avatar, name, email, etc.
 # -----------------------------------------------------------------------------
 profile:
-  name: "Muhammet Abdullah Şahin"
-  short_name: "M. A. Şahin" 
-  email: "sahinmuhammetabdullah@gmail.com"
-  phone: "+90 555 123 4567" # İsteğe bağlı
+  name: "Portfolio"
+  short_name: "Port." 
+  email: "portfolio@gmail.com"
+  phone: "+90 999 999 9999" # İsteğe bağlı
   avatar: "/assets/images/profile.png"
 
 # -----------------------------------------------------------------------------

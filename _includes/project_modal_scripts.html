@@ -11,8 +11,8 @@
                 "title": {{ p.title | jsonify }},
                 "content": {{ p.content | strip_newlines | jsonify }},
                 "tags": {{ p.tags | jsonify | default: "[]" }},
-                "github": "{{ p.github_url }}",
-                "live": "{{ p.live_url }}"
+                "github": {{ p.github_url | jsonify }},
+                "live": {{ p.live_url | jsonify }}
             }{% unless forloop.last %},{% endunless %}
             {%- endfor -%}
         ]
@@ -48,15 +48,20 @@
                     modalTagsEl.appendChild(tagElement);
                 });
             }
+            
+            // Bu bölüm artık doğru veriyi alacak
             modalGithubEl.href = project.github || '#';
             modalLiveEl.href = project.live || '#';
+            
             modalGithubEl.style.display = project.github ? 'inline-flex' : 'none';
             modalLiveEl.style.display = project.live ? 'inline-flex' : 'none';
+            
             projectModal.classList.remove('opacity-0', 'pointer-events-none');
             projectModalContentContainer.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
         }
     }
+    
     function closeProjectModal() {
         if (!projectModal || !projectModalContentContainer) return;
         projectModal.classList.add('opacity-0');
@@ -66,11 +71,13 @@
             document.body.style.overflow = 'auto';
         }, 300);
     }
+
     if(projectModal) {
         projectModal.addEventListener('click', (e) => {
             if (e.target.id === 'projectModal') closeProjectModal();
         });
     }
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('opacity-0')) {
             closeProjectModal();
