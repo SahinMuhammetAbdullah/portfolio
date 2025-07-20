@@ -68,7 +68,7 @@ collections:
 # -----------------------------------------------------------------------------
 # TR: Sitenizde desteklenecek dillerin listesi.
 # EN: A list of languages your site will support.
-languages: ["en", "tr", "de"]
+languages: ["en", "tr"]
 
 # TR: Sitenizin varsayılan dili. URL'de dil kodu olmadan erişilen dildir.
 # EN: The default language of your site. This is the language accessed without a language code in the URL.
