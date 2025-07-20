@@ -103,7 +103,7 @@ layout: default
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl font-bold mb-8 {{ colors.section_title }}">{{ s_global[current_page_lang].section_title_contact | default: "Contact" }}</h2>
             <p class="text-xl {{ colors.text_subtle }} mb-12">
-                {{ profile_for_current_page.contact_intro }}
+                {{ s.profile.contact_intro }}
             </p>
             <p class="text-xl {{ colors.text_subtle }} mb-12">
                 {{ s.contact.intro }}
