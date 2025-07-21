@@ -83,6 +83,6 @@ The project was built using the MERN stack with some variations:
 *   **Database:** MongoDB Atlas (cloud-hosted) for product, user, and order data.
 *   **Authentication:** JWT (JSON Web Tokens) for secure API access.
 *   **Payment Integration:** Stripe API for processing credit card payments.
-*   **Deployment:** Frontend على Vercel, Backend على Render (veya Heroku).
+*   **Deployment:** Frontend Vercel, Backend Render (veya Heroku).
 
 This project demonstrates proficiency in full-stack web development, API design, and e-commerce best practices.
