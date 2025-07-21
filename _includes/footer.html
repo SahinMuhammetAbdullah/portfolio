@@ -29,7 +29,23 @@
                 {% endfor %}
             </div>
 
-            <div class="pt-8 text-sm mb-6">
+            <div class="pt-4 text-sm mb-6">
+                <p class="text-sm">
+                    <!-- DEĞİŞİKLİK: Yeni footer_copyright verisi ve mantığı kullanılıyor -->
+                    {% assign year_str = site.time | date: '%Y' %}
+                    {% assign name_str = profile.name %}
+                    {% if s.profile.footer_copyright %}
+                        {% assign copyright_template = s.profile.footer_copyright %}
+                        {% assign final_copyright = copyright_template | replace: '{{ current_year }}', year_str %}
+                        {% assign final_copyright = final_copyright | replace: '{{ site_profile_name }}', name_str %}
+                        {{ final_copyright }}
+                    {% else %}
+                        © {{ year_str }} {{ name_str }}. All rights reserved.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="border-t border-ctp-surface0 pt-8">
                 <!-- Bu bölümdeki veriler _config.yml ve translations.yml'den geldiği için doğru çalışıyor -->
                 <p>
                     {{ s_global.footer_built_with | default: "Built with" }}
@@ -53,22 +69,6 @@
                     </a>
                 </p>
                 {% endif %}
-            </div>
-
-            <div class="border-t border-ctp-surface0 pt-8">
-                <p class="text-sm">
-                    <!-- DEĞİŞİKLİK: Yeni footer_copyright verisi ve mantığı kullanılıyor -->
-                    {% assign year_str = site.time | date: '%Y' %}
-                    {% assign name_str = profile.name %}
-                    {% if s.profile.footer_copyright %}
-                        {% assign copyright_template = s.profile.footer_copyright %}
-                        {% assign final_copyright = copyright_template | replace: '{{ current_year }}', year_str %}
-                        {% assign final_copyright = final_copyright | replace: '{{ site_profile_name }}', name_str %}
-                        {{ final_copyright }}
-                    {% else %}
-                        © {{ year_str }} {{ name_str }}. All rights reserved.
-                    {% endif %}
-                </p>
             </div>
         </div>
     </div>
