@@ -1,123 +1,46 @@
 ---
-layout: null # Jekyll'ın bu dosyayı işlemesini sağlar ama layout uygulamaz
+layout: null
 ---
 {
-    "name": "{{ site.title | default: 'Muhammet Abdullah Şahin' | escape }}",
-    "short_name": "{{ site.short_name | default: 'M.A.Şahin' | escape }}",
-    "description": "{{ site.description | default: 'Kişisel portfolyo ve proje sitesi.' | escape }}",
+    "name": "{{ site.title | default: 'Portfolio' | escape }}",
+    "short_name": "{{ site.author | default: 'Portfolio' | escape }}",
+    "description": "{{ site.description | escape }}",
     "icons": [
         {
             "src": "{{ '/assets/images/favicon/android-icon-36x36.png' | relative_url }}",
             "sizes": "36x36",
-            "type": "image/png",
-            "density": "0.75"
+            "type": "image/png"
         },
         {
             "src": "{{ '/assets/images/favicon/android-icon-48x48.png' | relative_url }}",
             "sizes": "48x48",
-            "type": "image/png",
-            "density": "1.0"
+            "type": "image/png"
         },
         {
             "src": "{{ '/assets/images/favicon/android-icon-72x72.png' | relative_url }}",
             "sizes": "72x72",
-            "type": "image/png",
-            "density": "1.5"
+            "type": "image/png"
         },
         {
             "src": "{{ '/assets/images/favicon/android-icon-96x96.png' | relative_url }}",
             "sizes": "96x96",
-            "type": "image/png",
-            "density": "2.0"
+            "type": "image/png"
         },
         {
             "src": "{{ '/assets/images/favicon/android-icon-144x144.png' | relative_url }}",
             "sizes": "144x144",
-            "type": "image/png",
-            "density": "3.0"
+            "type": "image/png"
         },
         {
             "src": "{{ '/assets/images/favicon/android-icon-192x192.png' | relative_url }}",
             "sizes": "192x192",
-            "type": "image/png",
-            "density": "4.0"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-57x57.png' | relative_url }}",
-            "sizes": "57x57",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-60x60.png' | relative_url }}",
-            "sizes": "60x60",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-72x72.png' | relative_url }}",
-            "sizes": "72x72",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-76x76.png' | relative_url }}",
-            "sizes": "76x76",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-114x114.png' | relative_url }}",
-            "sizes": "114x114",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-120x120.png' | relative_url }}",
-            "sizes": "120x120",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-144x144.png' | relative_url }}",
-            "sizes": "144x144",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-152x152.png' | relative_url }}",
-            "sizes": "152x152",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/apple-icon-180x180.png' | relative_url }}",
-            "sizes": "180x180",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/favicon-16x16.png' | relative_url }}",
-            "sizes": "16x16",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/favicon-32x32.png' | relative_url }}",
-            "sizes": "32x32",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/favicon-96x96.png' | relative_url }}",
-            "sizes": "96x96",
-            "type": "image/png"
-        },
-        {
-            "src": "{{ '/assets/images/favicon/ms-icon-144x144.png' | relative_url }}",
-            "sizes": "144x144",
             "type": "image/png"
         }
-        // Eğer .ico formatında genel bir faviconunuz varsa ve onu da eklemek isterseniz:
-        // {
-        //    "src": "{{ '/assets/images/favicon/favicon.ico' | relative_url }}",
-        //    "sizes": "48x48", // .ico birden fazla boyut içerebilir, temsili bir boyut
-        //    "type": "image/x-icon"
-        // }
     ],
     "start_url": "{{ '/' | relative_url }}",
     "display": "standalone",
-    "orientation": "portrait", // veya "landscape", "any"
-    "background_color": "{{ site.background_color | default: '#11111b' }}",
-    "theme_color": "{{ site.theme_color | default: '#1e1e2e' }}",
-    "scope": "{{ '/' | relative_url }}" // Genellikle start_url ile aynı veya daha geniş
+    "orientation": "portrait",
+    "background_color": "{{ site.data.themes[site.active_theme]['ctp-crust'] | default: '#11111b' }}",
+    "theme_color": "{{ site.data.themes[site.active_theme]['ctp-base'] | default: '#1e1e2e' }}",
+    "scope": "{{ '/' | relative_url }}"
 }

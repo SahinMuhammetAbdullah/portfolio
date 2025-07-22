@@ -123,7 +123,7 @@ theme_color: "{{ site.data.themes[site.active_theme]['ctp-base'] }}"
 
 # TR: PWA (Progressive Web App) splash screen için arka plan rengi.
 # EN: Background color for the PWA splash screen.
-background_color: "{{ site.data.themes[site.active_theme]['ctp-crust'] }}"
+background_color: "{{ site.data.themes[site.active_theme]['ctp-crust'] | default: '#11111b' }}"
 
 # TR: Windows Metro arayüzünde siteniz sabitlendiğinde kullanılacak karo rengi.
 # EN: Tile color for when your site is pinned on the Windows Metro UI.
