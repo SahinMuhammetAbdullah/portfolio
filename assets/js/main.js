@@ -111,3 +111,24 @@ window.addEventListener('scroll', () => {
 
 // Project modal functions (aşağıda _includes/project_modal_scripts.html içinde olacak)
 // Bu dosya sadece genel UI etkileşimlerini içermeli
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (mobileMenuBtn && mobileMenu) {
+        // Hamburger butonuna tıklandığında menüyü aç/kapat
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Menü içindeki bir linke tıklandığında menüyü otomatik olarak kapat
+        // Bu, özellikle #about gibi sayfa içi linkler için kullanıcı deneyimini iyileştirir.
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+});

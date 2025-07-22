@@ -133,28 +133,11 @@
         </div>
     </div>
 
-    <!-- Mobil Menü Açılır Pencere - BaseURL kontrolü ile -->
+    <!-- Mobil Menü Açılır Pencere -->
     <div id="mobile-menu" class="hidden md:hidden bg-ctp-mantle border-t border-ctp-surface0">
         <div class="px-6 py-4 space-y-4">
             {% for item in nav_links %}
-                {% assign item_url_str_mobile = item.url | default: "" %}
-                {% assign first_char_mobile = item_url_str_mobile | slice: 0, 1 %}
-                
-                {% if first_char_mobile == "#" %}
-                    <a href="{{ item.url }}" class="block hover:text-ctp-lavender transition-colors mobile-nav-link">
-                        {{ item.title }}
-                    </a>
-                {% else %}
-                    {% if current_active_lang == site.default_lang %}
-                        <a href="{{ baseurl_prefix }}{{ item.url }}" class="block hover:text-ctp-lavender transition-colors mobile-nav-link">
-                            {{ item.title }}
-                        </a>
-                    {% else %}
-                        <a href="{{ baseurl_prefix }}/{{ current_active_lang }}{{ item.url }}" class="block hover:text-ctp-lavender transition-colors mobile-nav-link">
-                            {{ item.title }}
-                        </a>
-                    {% endif %}
-                {% endif %}
+                <a href="{{ item.url }}" class="block hover:text-ctp-lavender transition-colors mobile-nav-link">{{ item.title }}</a>
             {% endfor %}
         </div>
     </div>
